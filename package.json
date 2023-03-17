@@ -10,9 +10,22 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
-    }
+        "axios": "^0.21.1",
+        "bootstrap": "^4.0.0",
+        "cross-env": "^5.1",
+        "jquery": "^3.5.1",
+        "laravel-mix": "^6.0.11",
+        "lodash": "^4.17.13",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.26.9",
+        "sass-loader": "^7.1.0",
+        "vue": "^2.5.17",
+        "vue-template-compiler": "^2.6.6"
+    },
+    "dependencies": {
+        "node-sass": "^4.14.1",
+        "paper-dashboard-2": "^2.0.0"
+    },
+    "name": "urlhum"
 }
