@@ -1,4 +1,11 @@
 <?php
+use App\Models\User;
+
+function isAdmin()
+{
+    return User::isAdmin();
+}
+
 
 //快速修改.env文件
 function modifyEnv(array $data)
@@ -22,4 +29,9 @@ function modifyEnv(array $data)
 function get_db_prefix()
 {
     return config('database.connections.' . config('database.default') . '.prefix');
+}
+
+function setting($name)
+{
+    return '';
 }
