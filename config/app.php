@@ -80,7 +80,9 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // 'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'zh_CN'),
+    'locales' => ['en_US', 'it_IT', 'es_ES', 'zh_CN'],
 
     /*
     |--------------------------------------------------------------------------
