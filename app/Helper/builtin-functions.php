@@ -33,5 +33,5 @@ function get_db_prefix()
 
 function setting($name)
 {
-    return '';
+    return 1;
 }

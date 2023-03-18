@@ -12,7 +12,7 @@
 */
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('shorturl')->group(function() {
+Route::prefix('')->group(function() {
     Route::get('/', 'HomeController@dashboard')->name('home');
 
     Route::get('test', 'UrlController@createMultiple');
@@ -20,7 +20,7 @@ Route::prefix('shorturl')->group(function() {
     Route::get('privacy-policy', 'PagesController@privacy')->name('privacy');
     Route::get('terms-of-use', 'PagesController@tos')->name('tos');
 
-    Auth::routes(['verify' => true]);
+    \Illuminate\Support\Facades\Auth::routes(['verify' => true]);
 
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['show']])->middleware('admin');
