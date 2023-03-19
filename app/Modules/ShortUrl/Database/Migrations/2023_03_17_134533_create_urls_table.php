@@ -22,7 +22,7 @@ class CreateUrlsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->default(0)->comment('会员Id');
             $table->string('long_url', 200)->default('')->comment('长域名');
             $table->string('short_url', 200)->default('')->comment('短域名');
-            $table->boolean('is_private')->unsigned()->default(0)->comment('是否私密');
+            $table->boolean('is_public')->unsigned()->default(1)->comment('是否公开');
             $table->boolean('is_hidden')->unsigned()->default(0)->comment('是否隐藏');
             $table->integer('created_time')->unsigned()->default(0)->comment('创建时间');
             $table->integer('updated_time')->unsigned()->default(0)->comment('更新时间');
