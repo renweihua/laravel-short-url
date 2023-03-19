@@ -16,7 +16,7 @@ class Url extends Model
      * @param $is_hidden
      * @return int
      */
-    public static function createShortUrl($long_url, $short_url, $is_public, $is_hidden): int
+    public static function createShortUrl($long_url, $short_url, $is_public = 1, $is_hidden = 0): int
     {
         $user_id = 0;
         if (Auth::check()) {
@@ -65,14 +65,14 @@ class Url extends Model
      *
      * @return Collection
      */
-    public static function publicUrlsWidget(): Collection
+    public static function publicUrlsWidget()
     {
         return DB::table('urls')
-            ->select('urls.short_url', 'urls.long_url', \DB::raw('count(clicks.short_url) as clicks'), 'urls.created_at')
+            ->select('urls.short_url', 'urls.long_url', \DB::raw('count(clicks.short_url) as clicks'), 'urls.created_time')
             ->leftJoin('clicks', 'urls.short_url', '=', 'clicks.short_url')
-            ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_at')
-            ->orderBy('urls.created_at', 'DESC')
-            ->where('private', '=', 0)
+            ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_time')
+            ->orderBy('urls.created_time', 'DESC')
+            ->where('is_public', '=', 1)
             ->limit(8)
             ->get();
     }
