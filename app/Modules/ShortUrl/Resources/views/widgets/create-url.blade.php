@@ -82,8 +82,8 @@
                                         <label class="text-left" for="hideUrlStats" style="float:left;">{{ __('url.options.private_stats') }}</label>
                                         <div class="form-group text-right" id="hideUrlStatscontainer">
                                             <label class="custom-toggle">
-                                                <input type="hidden" name="hideUrlStats" value="1">
-                                                <input type="checkbox" name="hideUrlStats" value="0">
+                                                <input type="hidden" name="hideUrlStats" value="0">
+                                                <input type="checkbox" name="hideUrlStats" value="1">
                                                 <span class="custom-toggle-slider rounded-circle"></span>
                                             </label>
                                         </div>
