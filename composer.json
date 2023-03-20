@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "3.4.6",
         "nwidart/laravel-modules": "^8.3",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-honeypot": "^4.3"
     },
     "require-dev": {
