@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
 
-class ClickUrl extends Model
+class UrlClick extends Model
 {
     protected $table = 'clicks';
 

@@ -33,7 +33,7 @@ class CreateUrlsTable extends Migration
         });
         $table = get_db_prefix() . $table;
         // 设置表注释
-        DB::statement("ALTER TABLE `{$table}` comment '域名表'");
+        DB::statement("ALTER TABLE `{$table}` comment 'Url表'");
     }
 
     /**

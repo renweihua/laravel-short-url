@@ -100,7 +100,7 @@ class Url extends Model
      */
     public function clicks()
     {
-        return $this->hasMany(ClickUrl::class, 'short_url', 'short_url');
+        return $this->hasMany(UrlClick::class, 'short_url', 'short_url');
     }
 
     /**
