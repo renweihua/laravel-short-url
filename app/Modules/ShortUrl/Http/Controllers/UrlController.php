@@ -2,6 +2,7 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers;
 
+use App\Models\Url;
 use App\Modules\ShortUrl\Http\Requests\ShortUrlRequest;
 use App\Modules\ShortUrl\Services\UrlService;
 use Illuminate\Contracts\Support\Renderable;
@@ -77,5 +78,19 @@ class UrlController extends ShortUrlController
         return Redirect::route('home')
             ->with('success', $short)
             ->with('siteUrl', $siteUrl);
+    }
+
+    /**
+     * Load the public URLs list to show.
+     *
+     * @return Factory|View
+     */
+    public function publicUrls()
+    {
+        if (! setting('show_guests_latests_urls') && ! isAdmin()) {
+            abort(404);
+        }
+
+        return view('shorturl::url.public')->with('urls', Url::getLatestPublicUrls());
     }
 }

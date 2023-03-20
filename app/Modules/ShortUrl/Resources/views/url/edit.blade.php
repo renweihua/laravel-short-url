@@ -42,10 +42,10 @@
 
                                 <div class="d-flex justify-content-between">
                                     <p class="pull-left">
-											<span class="badge badge-info">{{ __('url.created', ['date' => $data['url']->created_at]) }}</span>
+											<span class="badge badge-info">{{ __('url.created', ['date' => $data['url']->created_time]) }}</span>
                                     </p>
                                     <p class="pull-right">
-											<span class="badge badge-light">{{ __('url.updated', ['date' => $data['url']->updated_at]) }}</span>
+											<span class="badge badge-light">{{ __('url.updated', ['date' => $data['url']->updated_time]) }}</span>
                                     </p>
                                 </div>
                                 <p>

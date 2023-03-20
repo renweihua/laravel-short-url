@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Url extends Model
 {
@@ -52,10 +53,10 @@ class Url extends Model
      */
     public static function getLatestPublicUrls(): LengthAwarePaginator
     {
-        return self::select('urls.short_url', 'urls.long_url', \DB::raw('count(url_clicks.short_url) as clicks'), 'urls.created_at')
+        return self::select('urls.short_url', 'urls.long_url', DB::raw('count(url_clicks.short_url) as clicks'), 'urls.created_time')
             ->leftJoin('url_clicks', 'urls.short_url', '=', 'url_clicks.short_url')
-            ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_at')
-            ->orderBy('urls.created_at', 'DESC')
+            ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_time')
+            ->orderBy('urls.created_time', 'DESC')
             ->where('is_public', '=', 1)
             ->paginate('20');
     }
