@@ -22,13 +22,13 @@ class UrlClick extends Model
     /**
      * Check if the click is actually real or not, based on the IP and datetime.
      *
-     * @param $short_url
+     * @param $url_id
      * @param $ip_address
      * @return bool
      */
-    public static function realClick($short_url, $ip_address)
+    public static function realClick($url_id, $ip_address)
     {
-        $click = self::whereRaw('BINARY `short_url` = ?', [$short_url])
+        $click = self::where('url_id', $url_id)
             ->where('ip_address', $ip_address)
             ->where('created_time', '>=', Carbon::now()->subDay())
             ->where(function ($query) {

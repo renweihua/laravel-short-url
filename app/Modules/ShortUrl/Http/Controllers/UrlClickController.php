@@ -59,7 +59,7 @@ class UrlClickController extends ShortUrlController
         $click = 1;
         $real_click = 0;
 
-        if (UrlClick::realClick($url, $ip)) {
+        if (UrlClick::realClick($urlRecord->id, $ip)) {
             $click = 0;
             $real_click = 1;
         }

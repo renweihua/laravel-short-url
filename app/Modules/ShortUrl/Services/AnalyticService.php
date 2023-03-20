@@ -22,9 +22,9 @@ class AnalyticService
      * @param $url
      * @return array
      */
-    public static function getCountriesClicks($url)
+    public static function getCountriesClicks($url_id)
     {
-        $countriesClicks = UrlClick::whereRaw('BINARY `short_url` = ?', [$url])
+        $countriesClicks = UrlClick::where('url_id', $url_id)
             ->select('country_full', DB::raw('count(*) as views'), DB::raw('sum(real_click) as real_views'))
             ->groupBy('country_full')
             ->get();
@@ -62,10 +62,10 @@ class AnalyticService
      * @param $url
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function getUrlReferers($url)
+    public static function getUrlReferers($url_id)
     {
-        $referers = UrlClick::whereRaw('BINARY `short_url` = ?', [$url])
-            ->select('referer', \DB::raw('sum(click+real_click) as clicks'), \DB::raw('sum(real_click) as real_clicks'))
+        $referers = UrlClick::where('url_id', $url_id)
+            ->select('referer', DB::raw('sum(click+real_click) as clicks'), DB::raw('sum(real_click) as real_clicks'))
             ->groupBy('referer')
             ->orderBy('real_clicks', 'DESC')
             ->paginate(20);
@@ -79,9 +79,9 @@ class AnalyticService
      * @param $url
      * @return mixed
      */
-    public static function getLatestClicks($url)
+    public static function getLatestClicks($url_id)
     {
-        $clicks = UrlClick::whereRaw('BINARY `short_url` = ?', [$url])
+        $clicks = UrlClick::where('url_id', $url_id)
             ->select('referer', 'created_time')
             ->orderBy('created_time', 'DESC')
             ->take(8)
