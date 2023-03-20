@@ -10,7 +10,6 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
 // 引入 ShortUrl 模块下的 webpack 配置文件
 require(`${__dirname}/app/Modules/ShortUrl/webpack.mix.js`);
 

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,17 +12,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Route;
 
 Route::prefix('')->group(function() {
     Route::get('/', 'HomeController@dashboard')->name('home');
+
 
     Route::get('test', 'UrlController@createMultiple');
 
     Route::get('privacy-policy', 'PagesController@privacy')->name('privacy');
     Route::get('terms-of-use', 'PagesController@tos')->name('tos');
 
-    \Illuminate\Support\Facades\Auth::routes(['verify' => true]);
+    Auth::routes(['verify' => true]);
 
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['show']])->middleware('admin');

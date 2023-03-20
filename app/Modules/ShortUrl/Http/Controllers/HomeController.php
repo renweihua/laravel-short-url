@@ -3,6 +3,7 @@
 namespace App\Modules\ShortUrl\Http\Controllers;
 
 use App\Models\Url;
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -15,14 +16,14 @@ class HomeController extends ShortUrlController
      */
     public function dashboard()
     {
-        $publicWidget = $referersWidget = [];
+        $referersWidget = [];
         $anonymous = '';
         $anonymousUrls = '';
         return view('shorturl::dashboard', [
             'publicUrls' => Url::publicUrlsWidget(),
             'referers' => $referersWidget,
-            'urlsCount' => rand(0, 10000),
-            'usersCount' => rand(0, 10000),
+            'urlsCount' => Url::count(),
+            'usersCount' => User::count(),
             'referersCount' => rand(0, 10000),
             'anonymous' => $anonymous,
             'anonymous_urls' => $anonymousUrls,
