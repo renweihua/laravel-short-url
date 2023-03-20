@@ -61,5 +61,5 @@ Route::prefix('')->group(function() {
     Route::get('/{url}+', 'AnalyticController@show')->name('stats');
     Route::get('/{url}.svg', 'QRCodeController@svg')->name('qrcode.svg');
     Route::get('/{url}.png', 'QRCodeController@png')->name('qrcode.png');
-    Route::get('/{url}', 'ClickUrlController@click')->name('click');
+    Route::get('/{url}', 'UrlClickController@click')->name('click');
 });

@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UrlClick extends Model
 {
-    protected $table = 'clicks';
-
     /**
      * Store a new Click in database.
      *
@@ -29,10 +28,9 @@ class UrlClick extends Model
      */
     public static function realClick($short_url, $ip_address)
     {
-        $click = DB::table('clicks')
-            ->whereRaw('BINARY `short_url` = ?', [$short_url])
+        $click = self::whereRaw('BINARY `short_url` = ?', [$short_url])
             ->where('ip_address', $ip_address)
-            ->where('created_at', '>=', Carbon::now()->subDay())
+            ->where('created_time', '>=', Carbon::now()->subDay())
             ->where(function ($query) {
                 $query->where(function ($query) {
                     $query->where('ip_hashed', 1)
@@ -46,7 +44,7 @@ class UrlClick extends Model
                 });
             })
             ->limit(1)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_time', 'desc')
             ->get();
 
         return $click->isNotEmpty() ? false : true;

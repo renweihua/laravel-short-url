@@ -7,8 +7,10 @@
     "require": {
         "php": "^7.3|^8.0",
         "fruitcake/laravel-cors": "^2.0",
+        "geoip2/geoip2": "^2.13",
         "guzzlehttp/guzzle": "^7.0.1",
         "hashids/hashids": "^4.1",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
@@ -34,7 +36,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helper/builtin-functions.php"
+            "app/Helper/builtin-functions.php",
+            "app/Helper/functions.php"
         ]
     },
     "autoload-dev": {

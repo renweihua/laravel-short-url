@@ -213,7 +213,7 @@ class UrlService
                     'short_url_id' => $short_url_id,
                     'device' => $device->id,
                     'target_url' => $request[$device->name],
-                    'created_at' => date('Y-m-d H:i:s'),
+                    'created_time' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s')
                 ];
             }
@@ -228,10 +228,10 @@ class UrlService
      */
     public function getTargets(Url $short_url)
     {
-        return DB::table('device_targets_enum')
+        return DB::table('device_targets_enums')
             ->leftJoin('device_targets', static function($join) use ($short_url)
             {
-                $join->on('device_targets.device', '=', 'device_targets_enum.id');
+                $join->on('device_targets.device', '=', 'device_targets_enums.id');
                 $join->where('device_targets.short_url_id', '=', $short_url->id);
             })
             ->select('*')

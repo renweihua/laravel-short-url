@@ -82,8 +82,8 @@ class AnalyticService
     public static function getLatestClicks($url)
     {
         $clicks = UrlClick::whereRaw('BINARY `short_url` = ?', [$url])
-            ->select('referer', 'created_at')
-            ->orderBy('created_at', 'DESC')
+            ->select('referer', 'created_time')
+            ->orderBy('created_time', 'DESC')
             ->take(8)
             ->get();
 
