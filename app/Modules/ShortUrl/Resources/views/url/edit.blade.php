@@ -105,7 +105,7 @@
                                             <label class="custom-toggle">
                                                 <input type="hidden" name="hideUrlStats" value="0">
                                                 <input type="checkbox" name="hideUrlStats" value="1"
-                                                       @if ($data['url']->hide_stats == 1) checked @endif>
+                                                       @if ($data['url']->is_hidden == 1) checked @endif>
                                                 <span class="custom-toggle-slider rounded-circle"></span>
                                             </label>
                                         </div>

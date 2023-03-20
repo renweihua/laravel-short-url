@@ -37,7 +37,6 @@ class UrlController extends ShortUrlController
     public function store(ShortUrlRequest $request)
     {
         $data = $request->validated();
-        var_dump($data);
         $siteUrl = request()->getHttpHost();
 
         // If user is not logged in, he can't set private statistics,

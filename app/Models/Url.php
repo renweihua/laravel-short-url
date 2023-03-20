@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -50,12 +52,11 @@ class Url extends Model
      */
     public static function getLatestPublicUrls(): LengthAwarePaginator
     {
-        return DB::table('urls')
-            ->select('urls.short_url', 'urls.long_url', \DB::raw('count(clicks.short_url) as clicks'), 'urls.created_at')
-            ->leftJoin('clicks', 'urls.short_url', '=', 'clicks.short_url')
+        return self::select('urls.short_url', 'urls.long_url', \DB::raw('count(url_clicks.short_url) as clicks'), 'urls.created_at')
+            ->leftJoin('url_clicks', 'urls.short_url', '=', 'url_clicks.short_url')
             ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_at')
             ->orderBy('urls.created_at', 'DESC')
-            ->where('private', '=', 0)
+            ->where('is_public', '=', 1)
             ->paginate('20');
     }
 
@@ -67,9 +68,8 @@ class Url extends Model
      */
     public static function publicUrlsWidget()
     {
-        return DB::table('urls')
-            ->select('urls.short_url', 'urls.long_url', \DB::raw('count(clicks.short_url) as clicks'), 'urls.created_time')
-            ->leftJoin('clicks', 'urls.short_url', '=', 'clicks.short_url')
+        return self::select(['urls.short_url', 'urls.long_url', DB::raw('count(url_clicks.short_url) as clicks'), 'urls.created_time'])
+            ->leftJoin('url_clicks', 'url_clicks.short_url', '=', 'url_clicks.short_url')
             ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_time')
             ->orderBy('urls.created_time', 'DESC')
             ->where('is_public', '=', 1)
@@ -100,7 +100,7 @@ class Url extends Model
      */
     public function clicks()
     {
-        return $this->hasMany(UrlClick::class, 'short_url', 'short_url');
+        return $this->hasMany(UrlClick::class, 'url_id', 'id');
     }
 
     /**

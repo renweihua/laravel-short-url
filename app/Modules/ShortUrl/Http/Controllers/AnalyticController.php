@@ -52,7 +52,7 @@ class AnalyticController extends ShortUrlController
             },
         ])->whereRaw('BINARY `short_url` = ?',  [$url])->firstOrFail();
 
-        if ($urlWithRelations->hide_stats && ! $this->url->OwnerOrAdmin($url)) {
+        if ($urlWithRelations->is_hidden && ! $this->url->OwnerOrAdmin($url)) {
             abort(403);
         }
 
