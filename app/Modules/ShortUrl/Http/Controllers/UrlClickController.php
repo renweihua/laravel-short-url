@@ -27,9 +27,9 @@ class UrlClickController extends ShortUrlController
     {
         $urlService = new UrlService();
 
-        $urlRecord = $result = Url::whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
+        $urlRecord = Url::whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
         if ($urlRecord) {
-            $externalUrl = $urlService->getLongUrl($result);
+            $externalUrl = $urlService->getLongUrl($urlRecord);
         }
 
         $ip = request()->ip();
@@ -71,7 +71,6 @@ class UrlClickController extends ShortUrlController
 
         $data = [
             'url_id' => $urlRecord->id,
-            'short_url' => $url,
             'click' => $click,
             'real_click' => $real_click,
             'country' => $countries['countryCode'],

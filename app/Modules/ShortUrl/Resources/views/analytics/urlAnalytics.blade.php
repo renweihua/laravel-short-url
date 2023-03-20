@@ -104,7 +104,7 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            {{ $click->created_time->diffForHumans() }}
+                                                            {{ formatting_timestamp($click->created_time) }}
                                                         </td>
                                                         @endforeach
                                                     </tr>

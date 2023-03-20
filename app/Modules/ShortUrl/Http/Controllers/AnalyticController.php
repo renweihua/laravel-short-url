@@ -48,7 +48,7 @@ class AnalyticController extends ShortUrlController
                 $query->where('real_click', 1);
             },
             'clicks as today_clicks_count' => function ($query) {
-                $query->where('created_at', '>=', Carbon::now()->subDay());
+                $query->where('created_time', '>=', Carbon::now()->subDay());
             },
         ])->whereRaw('BINARY `short_url` = ?',  [$url])->firstOrFail();
 
@@ -61,11 +61,11 @@ class AnalyticController extends ShortUrlController
             'clicks' => $urlWithRelations->clicks_count,
             'realClicks' => $urlWithRelations->real_clicks_count,
             'todayClicks' => $urlWithRelations->today_clicks_count,
-            'countriesClicks' => $this->analytics::getCountriesClicks($url),
-            'countriesColor' =>  $this->analytics::getCountriesColor($this->analytics::getCountriesClicks($url)),
-            'latestClicks' => $this->analytics::getLatestClicks($url),
-            'referers' =>  $this->analytics::getUrlReferers($url),
-            'creationDate' => Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', $urlWithRelations->created_time))->diffForHumans(),
+            'countriesClicks' => $this->analytics::getCountriesClicks($urlWithRelations->id),
+            'countriesColor' =>  $this->analytics::getCountriesColor($this->analytics::getCountriesClicks($urlWithRelations->id)),
+            'latestClicks' => $this->analytics::getLatestClicks($urlWithRelations->id),
+            'referers' =>  $this->analytics::getUrlReferers($urlWithRelations->id),
+            'creationDate' => formatting_timestamp($urlWithRelations->created_time),
             'isOwnerOrAdmin' => $this->url->OwnerOrAdmin($url),
         ];
 
