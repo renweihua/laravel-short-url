@@ -52,13 +52,13 @@ Route::prefix('')->group(function() {
         Route::get('list', 'UrlController@showUrlsList')->middleware('admin')->name('url.list');
         Route::get('list-load', 'UrlController@loadUrlsList')->middleware('admin')->name('url.list-load');
         Route::get('public', 'UrlController@publicUrls')->name('url.public');
-        Route::get('referers', 'AnalyticsController@showReferrersList')->name('url.referers')->middleware('admin');
+        Route::get('referers', 'AnalyticController@showReferrersList')->name('url.referers')->middleware('admin');
     });
 
     // We use "show" in place of "edit", because the "real" show is /{url}
     Route::resource('url', 'UrlController')->except(['edit', 'index'])->middleware(['verifycheck', 'honeypot']);
 
-    Route::get('/{url}+', 'AnalyticsController@show')->name('stats');
+    Route::get('/{url}+', 'AnalyticController@show')->name('stats');
     Route::get('/{url}.svg', 'QRCodeController@svg')->name('qrcode.svg');
     Route::get('/{url}.png', 'QRCodeController@png')->name('qrcode.png');
     Route::get('/{url}', 'ClickUrlController@click')->name('click');

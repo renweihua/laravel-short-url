@@ -12,7 +12,7 @@ class Setting extends Model
      */
     public static function getAllSettings()
     {
-        $settings = Setting::all();
+        $settings = Setting::pluck('value', 'key');
         $reserved = json_decode($settings['reservedShortUrls'], true, 512, JSON_THROW_ON_ERROR);
 
         // Check if there are actually any reserved Short URLs

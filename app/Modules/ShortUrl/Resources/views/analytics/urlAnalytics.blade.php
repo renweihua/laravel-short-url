@@ -104,7 +104,7 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            {{ $click->created_at->diffForHumans() }}
+                                                            {{ $click->created_time->diffForHumans() }}
                                                         </td>
                                                         @endforeach
                                                     </tr>

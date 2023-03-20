@@ -6,6 +6,7 @@ use App\Models\DeviceTarget;
 use App\Models\DeviceTargetsEnum;
 use App\Models\Setting;
 use App\Models\Url;
+use App\Models\User;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;

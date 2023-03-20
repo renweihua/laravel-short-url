@@ -33,5 +33,6 @@ function get_db_prefix()
 
 function setting($name)
 {
-    return 1;
+    $all_settings = \App\Models\Setting::getAllSettings();
+    return $all_settings->get($name);
 }
