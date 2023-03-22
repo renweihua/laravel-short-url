@@ -2,19 +2,10 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers;
 
-use App\Library\IpAnonymizer;
-use App\Models\Url;
-use App\Models\UrlClick;
+use App\Modules\ShortUrl\Http\Requests\PasswordRequest;
 use App\Modules\ShortUrl\Http\Requests\ProfileRequest;
-use App\Modules\ShortUrl\Http\Requests\ShortUrlRequest;
-use App\Modules\ShortUrl\Services\UrlService;
-use GeoIp2\Database\Reader;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends ShortUrlController
 {
