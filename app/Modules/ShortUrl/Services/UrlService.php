@@ -106,9 +106,7 @@ class UrlService
             return false;
         }
 
-        $urlUser = Url::whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
-
-        return $urlUser->user_id === Auth::user()->id;
+        return $url->user_id === Auth::user()->id;
     }
 
     /**

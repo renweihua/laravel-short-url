@@ -3,6 +3,7 @@
 namespace App\Modules\ShortUrl\Http\Controllers;
 
 use App\Models\Url;
+use App\Models\UrlClick;
 use App\Modules\ShortUrl\Http\Requests\ShortUrlRequest;
 use App\Modules\ShortUrl\Services\UrlService;
 use Illuminate\Contracts\Support\Renderable;
@@ -11,6 +12,10 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Response;
 
 class UrlController extends ShortUrlController
 {
@@ -105,5 +110,27 @@ class UrlController extends ShortUrlController
         $urls = Url::getMyUrls();
 
         return view('shorturl::url.my')->with('urls', $urls);
+    }
+
+    /**
+     * Delete a Short URL on user request.
+     *
+     * @param $url
+     * @return ResponseFactory|RedirectResponse|Response
+     */
+    public function destroy($short_url)
+    {
+        $url = Url::whereRaw('BINARY `short_url` = ?',  [$short_url])->firstOrFail();
+
+        if (! $this->url->OwnerOrAdmin($url)) {
+            return response('Forbidden', 403);
+        }
+
+        UrlClick::deleteUrlsClicks($url);
+
+        $url->deviceTargets()->delete();
+        $url->delete();
+
+        return Redirect::route('url.my')->with(['success' => 'Short url "'.$url->short_url.'" deleted successfully. Its Analytics data has been deleted too.']);
     }
 }
