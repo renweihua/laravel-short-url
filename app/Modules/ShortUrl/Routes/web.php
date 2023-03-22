@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::prefix('')->group(function() {
+    // 首页 - ok
     Route::get('/', 'HomeController@dashboard')->name('home');
 
 
@@ -26,8 +27,12 @@ Route::prefix('')->group(function() {
 
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['show']])->middleware('admin');
+
+        // 编辑页 - ok
         Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+        // 编辑账户信息 - ok
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+
         Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
         Route::get('profile/access-token', ['as' => 'access_token.index', 'uses' => 'AccessTokenController@index']);
         Route::post('profile/access-token', ['as' => 'access_token.store', 'uses' => 'AccessTokenController@store']);
@@ -57,9 +62,11 @@ Route::prefix('')->group(function() {
 
     // We use "show" in place of "edit", because the "real" show is /{url}
     Route::resource('url', 'UrlController')->except(['edit', 'index'])->middleware(['verifycheck', 'honeypot']);
-
+    // 点击短链接 - ok
+    Route::get('/{url}', 'UrlClickController@click')->name('click');
+    // 短链接的详情统计页 - ok
     Route::get('/{url}+', 'AnalyticController@show')->name('stats');
+    
     Route::get('/{url}.svg', 'QRCodeController@svg')->name('qrcode.svg');
     Route::get('/{url}.png', 'QRCodeController@png')->name('qrcode.png');
-    Route::get('/{url}', 'UrlClickController@click')->name('click');
 });
