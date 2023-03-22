@@ -94,9 +94,9 @@
                                         <label class="text-left" for="privateUrl" style="float:left;">{{ __('url.options.hide') }}</label>
                                         <div class="form-group text-right" id="privateUrlcontainer">
                                             <label class="custom-toggle">
-                                                <input type="hidden" name="privateUrl" value="0">
-                                                <input type="checkbox" name="privateUrl" value="1"
-                                                       @if ($data['url']->private == 1) checked @endif >
+                                                <input type="hidden" name="privateUrl" value="1">
+                                                <input type="checkbox" name="privateUrl" value="0"
+                                                       @if ($data['url']->is_public == 0) checked @endif >
                                                 <span class="custom-toggle-slider rounded-circle"></span>
                                             </label>
                                         </div>

@@ -34,7 +34,7 @@ return [
   'by' => '创建者',
   'stats' => '查看统计信息',
   'options' => [
-    'hide' => '将此URL从设为私密',
+    'hide' => '将此URL从设为公开',
     'private_stats' => '将此URL统计信息设为私密',
     'destination' => 'URL 地址',
     'options' => '选项',

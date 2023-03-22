@@ -35,6 +35,7 @@ class UrlController extends ShortUrlController
 
         $this->url = $urlService;
     }
+
     /**
      * Store the data the user sent to create the Short URL.
      *
@@ -110,6 +111,59 @@ class UrlController extends ShortUrlController
         $urls = Url::getMyUrls();
 
         return view('shorturl::url.my')->with('urls', $urls);
+    }
+
+
+
+    /**
+     * Show the "edit" form of the URL.
+     * This method actually shows the URL edit page. It is not actually "@show" URL. The URL show is in clickUrl@view.
+     *
+     * @param $url
+     * @return ResponseFactory|Factory|Response|View
+     */
+    public function show($url)
+    {
+        $url = Url::with('user:id,name,email')->whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
+
+        if (! $this->url->OwnerOrAdmin($url) ) {
+            abort(403);
+        }
+
+        $targets = $this->url->getTargets($url);
+
+        $data['url'] = $url;
+
+        $data['targets'] = $targets;
+
+        return view('shorturl::url.edit')->with('data', $data);
+    }
+
+    /**
+     * Update the URL on the user request.
+     *
+     * @param $url
+     * @param ShortUrlRequest $request
+     *
+     * @return ResponseFactory|RedirectResponse|Response
+     */
+    public function update($url, ShortUrlRequest $request)
+    {
+        $url = Url::whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
+
+        if (! $this->url->OwnerOrAdmin($url)) {
+            return response('Forbidden', 403);
+        }
+
+        $data = $request->validated();
+
+        $url->is_public = $data['privateUrl'];
+        $url->is_hidden = $data['hideUrlStats'];
+        $url->long_url = $data['url'];
+        $url->update();
+
+        return Redirect::back()
+            ->with('success', 'Short URL updated successfully.');
     }
 
     /**
