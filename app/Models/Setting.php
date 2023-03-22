@@ -13,14 +13,6 @@ class Setting extends Model
     public static function getAllSettings()
     {
         $settings = Setting::pluck('value', 'key');
-        $reserved = json_decode($settings['reservedShortUrls'], true, 512, JSON_THROW_ON_ERROR);
-
-        // Check if there are actually any reserved Short URLs
-        // In case there aren't, we don't treat $reserved like an array
-        if (is_array($reserved)) {
-            $reserved = implode(PHP_EOL, $reserved);
-        }
-        $settings['reservedShortUrls'] = $reserved;
 
         return $settings;
     }
@@ -33,7 +25,7 @@ class Setting extends Model
      */
     public static function getReservedUrls()
     {
-        $settings = setting('reservedShortUrls');
+        $settings = setting('reservedShortUrls', []);
 
         return json_decode($settings, true, 512, JSON_THROW_ON_ERROR);
     }

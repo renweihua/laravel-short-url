@@ -31,8 +31,9 @@ function get_db_prefix()
     return config('database.connections.' . config('database.default') . '.prefix');
 }
 
-function setting($name)
+function setting($name, $default = '')
 {
     $all_settings = \App\Models\Setting::getAllSettings();
-    return $all_settings->get($name);
+    // var_dump($all_settings);
+    return $all_settings->get($name) ?? $default;
 }
