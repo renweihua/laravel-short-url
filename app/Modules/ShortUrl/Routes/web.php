@@ -34,7 +34,7 @@ Route::prefix('')->group(function() {
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
         // 更改登录密码 - ok
         Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
-        
+
         Route::get('profile/access-token', ['as' => 'access_token.index', 'uses' => 'AccessTokenController@index']);
         Route::post('profile/access-token', ['as' => 'access_token.store', 'uses' => 'AccessTokenController@store']);
         Route::delete('profile/access-token', ['as' => 'access_token.delete', 'uses' => 'AccessTokenController@delete']);

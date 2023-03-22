@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\RedirectResponse;
 
 class UrlController extends ShortUrlController
 {
@@ -92,5 +93,17 @@ class UrlController extends ShortUrlController
         }
 
         return view('shorturl::url.public')->with('urls', Url::getLatestPublicUrls());
+    }
+
+    /**
+     * Show the user its own short URLs.
+     *
+     * @return Factory|View
+     */
+    public function getMyUrls()
+    {
+        $urls = Url::getMyUrls();
+
+        return view('shorturl::url.my')->with('urls', $urls);
     }
 }
