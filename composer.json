@@ -17,7 +17,8 @@
         "laravel/ui": "3.4.6",
         "nwidart/laravel-modules": "^8.3",
         "simplesoftwareio/simple-qrcode": "^4.2",
-        "spatie/laravel-honeypot": "^4.3"
+        "spatie/laravel-honeypot": "^4.3",
+        "yajra/laravel-datatables-oracle": "9.21.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

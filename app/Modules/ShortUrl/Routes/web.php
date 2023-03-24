@@ -55,10 +55,13 @@ Route::prefix('')->group(function() {
             ->middleware('verifycheck');
         Route::get('my', 'UrlController@getMyUrls')->middleware('auth')->name('url.my')
             ->middleware('verifycheck');
-        Route::get('list', 'UrlController@showUrlsList')->middleware('admin')->name('url.list');
-        Route::get('list-load', 'UrlController@loadUrlsList')->middleware('admin')->name('url.list-load');
         Route::get('public', 'UrlController@publicUrls')->name('url.public');
         Route::get('referers', 'AnalyticController@showReferrersList')->name('url.referers')->middleware('admin');
+
+
+
+        Route::get('list', 'Admin\UrlController@showUrlsList')->middleware('admin')->name('url.list');
+        Route::get('list-load', 'Admin\UrlController@loadUrlsList')->middleware('admin')->name('url.list-load');
     });
 
     // We use "show" in place of "edit", because the "real" show is /{url}
