@@ -49,15 +49,19 @@ Route::prefix('')->group(function() {
     });
 
     Route::group(['prefix' => 'url'], function () {
+        // 批量创建页面 - ok
         Route::get('multiple', 'UrlMultipleController@createMultiple')->name('multiple');
+        // 批量创建短域名 - ok
         Route::post('multiple', 'UrlMultipleController@storeMultiple')->name('store-multiple');
+
         Route::post('short', 'UrlController@checkExistingUrl')->name('short')->name('url.short')
             ->middleware('verifycheck');
+        // 我的域名 - ok
         Route::get('my', 'UrlController@getMyUrls')->middleware('auth')->name('url.my')
             ->middleware('verifycheck');
+        // 公开短域名 - ok
         Route::get('public', 'UrlController@publicUrls')->name('url.public');
         Route::get('referers', 'AnalyticController@showReferrersList')->name('url.referers')->middleware('admin');
-
 
 
         // 管理员查看短链接列表-ok
