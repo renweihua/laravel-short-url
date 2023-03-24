@@ -1,7 +1,7 @@
 @extends('shorturl::layouts.app',  ['title' => trans('url.list')])
 @section('content')
-    <div class="header bg-gradient-primary mb-3 pt-6 	d-none d-lg-block d-md-block pt-md-7"></div>
-    <div class="container-fluid col-lg-10 col-md-10 col-sm-12 ">
+    <div class="header bg-gradient-primary mb-3 pt-6 d-none d-lg-block d-md-block pt-md-7"></div>
+    <div class="container-fluid col-lg-12 col-md-12 col-sm-12 ">
         <div class="header-body">
             <div class="row">
                 <div class="container-fluid">
@@ -74,8 +74,6 @@
                     {data: 'user.email', name: 'user.email'},
                     {data: 'created_time', name: 'created_time'},
                     {data: 'action', name: 'action'}
-
-
                 ],
                 columnDefs: [{
                     targets: 1,
@@ -84,17 +82,16 @@
                             data.substr(0, 20) + '[…]' :
                             data;
                     }
-                },
-                ],
+                },],
                 language: {
                     paginate: {
                         "previous": "&laquo;",
                         "next": "&raquo;",
                     }
-                }
+                },
+                order: [[0, 'desc']],
             });
         });
-
 
     </script>
     <style>
