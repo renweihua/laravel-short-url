@@ -33,6 +33,7 @@ return [
   'new' => 'Benutzerkonto erstellen',
   'sign_up' => 'Für :site registrieren',
   'name' => 'Name',
+    'role' => 'Role',
   'agreement' => 'Ich bin einverstanden mit den',
   'agreement_error' => 'Um fortzufahren müssen Sie unsere TOS / Datenschutzerklärung akzeptieren.',
   'create' => 'Benutzerkonto erstellen',

@@ -33,6 +33,7 @@ return [
   'new' => 'Crea nuovo account',
   'sign_up' => 'Iscriviti a :site',
   'name' => 'Nome',
+    'role' => 'Role',
   'agreement' => 'Accetto',
   'agreement_error' => 'Per procedere devi accettare i Termini di Utilizzo / Privacy Policy.',
   'create' => 'Crea account',

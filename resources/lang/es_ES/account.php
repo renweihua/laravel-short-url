@@ -33,6 +33,7 @@ return [
   'new' => 'Crear una nueva cuenta',
   'sign_up' => 'Registrarse en :site',
   'name' => 'Nombre',
+    'role' => 'Role',
   'agreement' => 'Estoy de acuerdo con el',
   'agreement_error' => 'Para proceder debes aceptar nuestra TOS / Política de privacidad.',
   'create' => 'Crear cuenta',

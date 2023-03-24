@@ -33,6 +33,7 @@ return [
   'new' => 'Create new account',
   'sign_up' => 'Sign up to :site',
   'name' => 'Name',
+    'role' => 'Role',
   'agreement' => 'I agree with the',
   'agreement_error' => 'To proceed you must accept our TOS / Privacy Policy.',
   'create' => 'Create account',

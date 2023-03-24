@@ -33,6 +33,7 @@ return [
   'new' => 'Δημιουργία νέου λογαριασμού',
   'sign_up' => 'Sign up to :site',
   'name' => 'Όνομα',
+    'role' => 'Role',
   'agreement' => 'I agree with the',
   'agreement_error' => 'To proceed you must accept our TOS / Privacy Policy.',
   'create' => 'Δημιουργία λογαριασμού',

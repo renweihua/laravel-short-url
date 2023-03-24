@@ -41,7 +41,7 @@ class UrlController extends ShortUrlController
      *
      * @return Factory|View
      */
-    public function showUrlsList()
+    public function showUrlsList(Request $request)
     {
         return view('shorturl::url.list');
     }

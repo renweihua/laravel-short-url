@@ -3,7 +3,7 @@
 @section('content')
     <div class="header bg-gradient-primary mb-3 pt-6 	d-none d-lg-block d-md-block pt-md-7">
     </div>
-    <div class="container-fluid col-lg-6 col-md-8 col-sm-12">
+    <div class="container-fluid col-lg-12 col-md-12 col-sm-12">
         <div class="header-body">
             <div class="row">
                 <div class="container-fluid">
@@ -37,6 +37,7 @@
                                     <tr>
                                         <th scope="col">{{ __('account.name') }}</th>
                                         <th scope="col">{{ __('account.email') }}</th>
+                                        <th scope="col">{{ __('account.role') }}</th>
                                         <th scope="col">{{ __('account.creation_date') }}</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -48,7 +49,8 @@
                                             <td>
                                                 <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                             </td>
-                                            <td>{{ $user->created_time->format('m/d/Y H:i') }}</td>
+                                            <td>{{ $user->role }}</td>
+                                            <td>{{ date('m/d/Y H:i', $user->created_time) }}</td>
                                             <td class="text-right">
                                                 <div class="dropdown">
                                                     <a class="btn btn-sm btn-icon-only text-light" href="#"

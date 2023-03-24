@@ -14,20 +14,16 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::prefix('')->group(function() {
+    // Auth - ok
+    Auth::routes(['verify' => true]);
     // 首页 - ok
     Route::get('/', 'HomeController@dashboard')->name('home');
-
-
-    Route::get('test', 'UrlController@createMultiple');
 
     Route::get('privacy-policy', 'PagesController@privacy')->name('privacy');
     Route::get('terms-of-use', 'PagesController@tos')->name('tos');
 
-    Auth::routes(['verify' => true]);
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::resource('user', 'UserController', ['except' => ['show']])->middleware('admin');
-
         // 编辑页 - ok
         Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
         // 编辑账户信息 - ok
@@ -35,6 +31,8 @@ Route::prefix('')->group(function() {
         // 更改登录密码 - ok
         Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
+
+        // 这种可生成对外的授权token，调用内部接口
         Route::get('profile/access-token', ['as' => 'access_token.index', 'uses' => 'AccessTokenController@index']);
         Route::post('profile/access-token', ['as' => 'access_token.store', 'uses' => 'AccessTokenController@store']);
         Route::delete('profile/access-token', ['as' => 'access_token.delete', 'uses' => 'AccessTokenController@delete']);
@@ -43,6 +41,8 @@ Route::prefix('')->group(function() {
             ->middleware('verified');
 
         Route::group(['middleware' => 'admin'], function () {
+            // Admin - 会员列表 - ok
+            Route::resource('user', 'Admin\UserController', ['except' => ['show']]);
             Route::get('settings', ['as' => 'settings', 'uses' => 'SettingsController@show']);
             Route::post('settings/save', ['as' => 'settings.save', 'uses' => 'SettingsController@save']);
         });
@@ -60,7 +60,9 @@ Route::prefix('')->group(function() {
 
 
 
+        // 管理员查看短链接列表-ok
         Route::get('list', 'Admin\UrlController@showUrlsList')->middleware('admin')->name('url.list');
+        // 管理员查看短链接列表的数据加载-ok
         Route::get('list-load', 'Admin\UrlController@loadUrlsList')->middleware('admin')->name('url.list-load');
     });
 
