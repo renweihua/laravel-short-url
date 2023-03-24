@@ -48,7 +48,7 @@
                                             <td>
                                                 <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                             </td>
-                                            <td>{{ $user->created_at->format('m/d/Y H:i') }}</td>
+                                            <td>{{ $user->created_time->format('m/d/Y H:i') }}</td>
                                             <td class="text-right">
                                                 <div class="dropdown">
                                                     <a class="btn btn-sm btn-icon-only text-light" href="#"

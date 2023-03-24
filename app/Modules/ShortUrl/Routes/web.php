@@ -49,8 +49,8 @@ Route::prefix('')->group(function() {
     });
 
     Route::group(['prefix' => 'url'], function () {
-        Route::get('multiple', 'UrlController@createMultiple')->name('multiple');
-        Route::post('multiple', 'UrlController@storeMultiple')->name('store-multiple');
+        Route::get('multiple', 'UrlMultipleController@createMultiple')->name('multiple');
+        Route::post('multiple', 'UrlMultipleController@storeMultiple')->name('store-multiple');
         Route::post('short', 'UrlController@checkExistingUrl')->name('short')->name('url.short')
             ->middleware('verifycheck');
         Route::get('my', 'UrlController@getMyUrls')->middleware('auth')->name('url.my')

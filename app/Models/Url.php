@@ -28,7 +28,7 @@ class Url extends Model
 
         $url = new self;
         $url->long_url = $long_url;
-        $url->short_url = $short_url;
+        if ($short_url) $url->short_url = $short_url;
         $url->user_id = $user_id;
         $url->is_public = $is_public;
         $url->is_hidden = $is_hidden;
