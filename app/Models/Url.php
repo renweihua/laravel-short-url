@@ -53,8 +53,8 @@ class Url extends Model
      */
     public static function getLatestPublicUrls(): LengthAwarePaginator
     {
-        return self::select('urls.short_url', 'urls.long_url', DB::raw('count(url_clicks.short_url) as clicks'), 'urls.created_time')
-            ->leftJoin('url_clicks', 'urls.short_url', '=', 'url_clicks.short_url')
+        return self::select('urls.short_url', 'urls.long_url', DB::raw('count(url_clicks.url_id) as clicks'), 'urls.created_time')
+            ->leftJoin('url_clicks', 'urls.id', '=', 'url_clicks.url_id')
             ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_time')
             ->orderBy('urls.created_time', 'DESC')
             ->where('is_public', '=', 1)
@@ -69,8 +69,8 @@ class Url extends Model
      */
     public static function publicUrlsWidget()
     {
-        return self::select(['urls.short_url', 'urls.long_url', DB::raw('count(url_clicks.short_url) as clicks'), 'urls.created_time'])
-            ->leftJoin('url_clicks', 'url_clicks.short_url', '=', 'url_clicks.short_url')
+        return self::select(['urls.short_url', 'urls.long_url', DB::raw('count(url_clicks.url_id) as clicks'), 'urls.created_time'])
+            ->leftJoin('url_clicks', 'urls.id', '=', 'url_clicks.url_id')
             ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_time')
             ->orderBy('urls.created_time', 'DESC')
             ->where('is_public', '=', 1)
