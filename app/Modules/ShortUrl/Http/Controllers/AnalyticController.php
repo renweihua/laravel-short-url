@@ -66,7 +66,7 @@ class AnalyticController extends ShortUrlController
             'latestClicks' => $this->analytics::getLatestClicks($urlWithRelations->id),
             'referers' =>  $this->analytics::getUrlReferers($urlWithRelations->id),
             'creationDate' => formatting_timestamp($urlWithRelations->created_time),
-            'isOwnerOrAdmin' => $this->url->OwnerOrAdmin($url),
+            'isOwnerOrAdmin' => $this->url->OwnerOrAdmin($urlWithRelations),
         ];
 
         return view('shorturl::analytics.urlAnalytics')->with($data);
