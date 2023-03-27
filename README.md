@@ -10,14 +10,9 @@
 
 #### 安装教程
 
-1.  composer install
-2.  cp .env.example .env
-3.  生成 APP_KEY：`php artisan key:generate`
-4.  数据表迁移 `php artisan migrate`
-5.  数据填充 `php artisan module:seed ShortUrl`
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. composer install
+2. cp .env.example .env
+3. 生成 APP_KEY：`php artisan key:generate`
+4. 数据表迁移 `php artisan migrate`
+5. 数据填充 `php artisan module:seed ShortUrl`
+6. 创建`Storage`目录软链接 `php artisan storage:link`
