@@ -17,9 +17,9 @@ class AdminUserTableSeeder extends Seeder
     {
         User::create([
             'name' => '小丑路人',
-            'email' => 'admin@小丑路人.com',
+            'email' => 'admin@qq.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('admin123456'),
+            'password' => Hash::make('123456'),
             'role' => 'admin',
         ]);
     }
