@@ -19,7 +19,9 @@ Route::prefix('')->group(function() {
     // 首页 - ok
     Route::get('/', 'HomeController@dashboard')->name('home');
 
+    // ok
     Route::get('privacy-policy', 'PagesController@privacy')->name('privacy');
+    // ok
     Route::get('terms-of-use', 'PagesController@tos')->name('tos');
 
 
@@ -30,7 +32,6 @@ Route::prefix('')->group(function() {
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
         // 更改登录密码 - ok
         Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
-
 
         // 这种可生成对外的授权token，调用内部接口
         Route::get('profile/access-token', ['as' => 'access_token.index', 'uses' => 'AccessTokenController@index']);
