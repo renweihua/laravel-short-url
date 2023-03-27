@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class Url extends Model
 {
@@ -58,7 +59,7 @@ class Url extends Model
             ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_time')
             ->orderBy('urls.created_time', 'DESC')
             ->where('is_public', '=', 1)
-            ->paginate('20');
+            ->paginate(20);
     }
 
     /**

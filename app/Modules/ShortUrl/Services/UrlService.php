@@ -229,8 +229,8 @@ class UrlService
         return DB::table('device_targets_enums')
             ->leftJoin('device_targets', static function($join) use ($short_url)
             {
-                $join->on('device_targets.device', '=', 'device_targets_enums.id');
-                $join->where('device_targets.short_url_id', '=', $short_url->id);
+                $join->on('device_targets.device_id', '=', 'device_targets_enums.id');
+                $join->where('device_targets.target_url', '=', $short_url->id);
             })
             ->select('*')
             ->get();
