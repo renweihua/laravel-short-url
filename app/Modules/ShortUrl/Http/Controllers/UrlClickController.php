@@ -35,7 +35,7 @@ class UrlClickController extends ShortUrlController
         $ip = request()->ip();
 
         if (setting('disable_referers')) {
-            $referer = null;
+            $referer = '';
         } else {
             $referer = request()->server('HTTP_REFERER');
         }
@@ -75,7 +75,7 @@ class UrlClickController extends ShortUrlController
             'real_click' => $real_click,
             'country' => $countries['countryCode'],
             'country_full' => $countries['countryName'],
-            'referer' => $referer ?? null,
+            'referer' => $referer ?? '',
             'ip_address' => $ip,
             'ip_hashed' => $hashed,
             'ip_anonymized' => $anonymized,

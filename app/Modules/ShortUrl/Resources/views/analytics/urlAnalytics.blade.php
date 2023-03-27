@@ -9,7 +9,7 @@
                         <div class="card shadow">
                             <div class="card-header d-flex justify-content-between">
                                 <h1>{{ __('analytics.show.title') }}
-                                    <a href="{{ url('/') }}/{{$url}}">{{ $url }}</a>
+                                    <a href="{{ url('/') }}/{{$url}}" target="_blank">{{ $url }}</a>
                                 </h1>
 
                                 <div>
