@@ -44,8 +44,8 @@ Route::prefix('')->group(function() {
         Route::group(['middleware' => 'admin'], function () {
             // Admin - 会员列表 - ok
             Route::resource('user', 'Admin\UserController', ['except' => ['show']]);
-            Route::get('settings', ['as' => 'settings', 'uses' => 'SettingsController@show']);
-            Route::post('settings/save', ['as' => 'settings.save', 'uses' => 'SettingsController@save']);
+            Route::get('settings', ['as' => 'settings', 'uses' => 'SettingController@show']);
+            Route::post('settings/save', ['as' => 'settings.save', 'uses' => 'SettingController@save']);
         });
     });
 
