@@ -73,9 +73,8 @@
                              id="privateUrlcontainer">
                             <label class="custom-toggle">
                                 <input type="hidden" name="privateUrl"
-                                       value="1">
-                                <input type="checkbox" name="privateUrl"
                                        value="0">
+                                <input type="checkbox" name="privateUrl" checked value="1">
                                 <span class="custom-toggle-slider rounded-circle"></span>
                             </label>
                         </div>
