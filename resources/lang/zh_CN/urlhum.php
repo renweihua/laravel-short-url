@@ -12,7 +12,7 @@ return [
   'privacypolicy' => '隐私政策',
   'and' => '与',
   'termsofuse' => '使用条款',
-  'dashboard' => '控制台',
+  'dashboard' => '首页',
   'design_by' => 'Design by',
   'users' => '用户',
   'welcome' => '欢迎！',

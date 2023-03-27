@@ -12,7 +12,7 @@ class PageController extends ShortUrlController
     public function privacy()
     {
         if (setting('enable_privacy_policy')) {
-            return view('pages.privacy-policy');
+            return view('shorturl::pages.privacy-policy');
         }
 
         return abort(404);
@@ -26,7 +26,7 @@ class PageController extends ShortUrlController
     public function tos()
     {
         if (setting('enable_terms_of_use')) {
-            return view('pages.terms-of-use');
+            return view('shorturl::pages.terms-of-use');
         }
 
         return abort(404);

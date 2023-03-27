@@ -20,9 +20,9 @@ Route::prefix('')->group(function() {
     Route::get('/', 'HomeController@dashboard')->name('home');
 
     // ok
-    Route::get('privacy-policy', 'PagesController@privacy')->name('privacy');
+    Route::get('privacy-policy', 'PageController@privacy')->name('privacy');
     // ok
-    Route::get('terms-of-use', 'PagesController@tos')->name('tos');
+    Route::get('terms-of-use', 'PageController@tos')->name('tos');
 
 
     Route::group(['middleware' => 'auth'], function () {
