@@ -43,4 +43,16 @@ class Setting extends Model
 
         return '/images/' . $imageName;
     }
+
+    public static function batchSave($data)
+    {
+        // 获取现有配置，对比需要更新的配置
+        $original_configs = self::getAllSettings();
+        foreach ($data as $key => $value){
+            if ($original_configs->get($key) == $value){
+                continue;
+            }
+            self::where('key', $key)->update(['value' => $value]);
+        }
+    }
 }

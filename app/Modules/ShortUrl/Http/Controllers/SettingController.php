@@ -49,8 +49,7 @@ class SettingController extends ShortUrlController
             }
         }
 
-        Setting::set($data);
-        Setting::save();
+        Setting::batchSave($data);
 
         return redirect()->back()->with('success', trans('settings.success'));
     }
