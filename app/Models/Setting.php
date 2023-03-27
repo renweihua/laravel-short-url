@@ -2,18 +2,30 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+
 class Setting extends Model
 {
+    public static function getSettingCacheKey()
+    {
+        return 'system:settings';
+    }
+
     /**
      * Get all settings.
      *
      * @return mixed
      * @throws JsonException
      */
-    public static function getAllSettings()
+    public static function getAllSettings($force = false)
     {
-        $settings = Setting::pluck('value', 'key');
-
+        $cache_key = self::getSettingCacheKey();
+        $settings = Cache::get($cache_key);
+        if (!$settings || $force){
+            $settings = Setting::pluck('value', 'key');
+            Cache::put($cache_key, $settings, Carbon::now()->addDays(7));
+        }
         return $settings;
     }
 
@@ -54,5 +66,7 @@ class Setting extends Model
             }
             self::where('key', $key)->update(['value' => $value]);
         }
+        // 清除缓存
+        Cache::forget(self::getSettingCacheKey());
     }
 }
