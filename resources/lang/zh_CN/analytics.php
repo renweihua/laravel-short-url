@@ -41,5 +41,6 @@ return [
     'created' => '短链接数量',
   ],
   'analytics' => '分析',
+    'statistics' => '统计',
   'time' => 'Time',
 ];
