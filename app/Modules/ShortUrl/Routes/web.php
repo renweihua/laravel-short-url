@@ -18,11 +18,10 @@ Route::prefix('')->group(function() {
     Auth::routes(['verify' => true]);
     // 首页 - ok
     Route::get('/', 'HomeController@dashboard')->name('home');
-
     // ok
-    Route::get('privacy-policy', 'PageController@privacy')->name('privacy');
+    Route::get('privacy-policy', 'PagesController@privacy')->name('privacy');
     // ok
-    Route::get('terms-of-use', 'PageController@tos')->name('tos');
+    Route::get('terms-of-use', 'PagesController@tos')->name('tos');
 
 
     Route::group(['middleware' => 'auth'], function () {
@@ -44,8 +43,9 @@ Route::prefix('')->group(function() {
         Route::group(['middleware' => 'admin'], function () {
             // Admin - 会员列表 - ok
             Route::resource('user', 'Admin\UserController', ['except' => ['show']]);
-            Route::get('settings', ['as' => 'settings', 'uses' => 'SettingController@show']);
-            Route::post('settings/save', ['as' => 'settings.save', 'uses' => 'SettingController@save']);
+            // 系统配置
+            Route::get('settings', ['as' => 'settings', 'uses' => 'SettingsController@show']);
+            Route::post('settings/save', ['as' => 'settings.save', 'uses' => 'SettingsController@save']);
         });
     });
 
@@ -54,7 +54,6 @@ Route::prefix('')->group(function() {
         Route::get('multiple', 'UrlMultipleController@createMultiple')->name('multiple');
         // 批量创建短域名 - ok
         Route::post('multiple', 'UrlMultipleController@storeMultiple')->name('store-multiple');
-
         Route::post('short', 'UrlController@checkExistingUrl')->name('short')->name('url.short')
             ->middleware('verifycheck');
         // 我的域名 - ok
@@ -62,22 +61,22 @@ Route::prefix('')->group(function() {
             ->middleware('verifycheck');
         // 公开短域名 - ok
         Route::get('public', 'UrlController@publicUrls')->name('url.public');
+
+
+        // 管理员查看短链接列表 - ok
+        Route::get('list', 'UrlController@showUrlsList')->middleware('admin')->name('url.list');
+        // 管理员查看短链接列表的数据加载 - ok
+        Route::get('list-load', 'UrlController@loadUrlsList')->middleware('admin')->name('url.list-load');
         Route::get('referers', 'AnalyticController@showReferrersList')->name('url.referers')->middleware('admin');
-
-
-        // 管理员查看短链接列表-ok
-        Route::get('list', 'Admin\UrlController@showUrlsList')->middleware('admin')->name('url.list');
-        // 管理员查看短链接列表的数据加载-ok
-        Route::get('list-load', 'Admin\UrlController@loadUrlsList')->middleware('admin')->name('url.list-load');
     });
 
     // We use "show" in place of "edit", because the "real" show is /{url}
     Route::resource('url', 'UrlController')->except(['edit', 'index'])->middleware(['verifycheck', 'honeypot']);
-    // 点击短链接 - ok
-    Route::get('/{url}', 'UrlClickController@click')->name('click');
+
     // 短链接的详情统计页 - ok
     Route::get('/{url}+', 'AnalyticController@show')->name('stats');
-
     Route::get('/{url}.svg', 'QRCodeController@svg')->name('qrcode.svg');
     Route::get('/{url}.png', 'QRCodeController@png')->name('qrcode.png');
+    // 点击短链接 - ok
+    Route::get('/{url}', 'UrlClickController@click')->name('click');
 });
