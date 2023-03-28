@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use JsonException;
 
 class Setting extends Model
 {
@@ -24,6 +25,15 @@ class Setting extends Model
         $settings = Cache::get($cache_key);
         if (!$settings || $force){
             $settings = Setting::pluck('value', 'key');
+
+            $reserved = json_decode($settings->get('reservedShortUrls'), true, 512, JSON_THROW_ON_ERROR);
+            // Check if there are actually any reserved Short URLs
+            // In case there aren't, we don't treat $reserved like an array
+            if (is_array($reserved)) {
+                $reserved = implode(PHP_EOL, $reserved);
+            }
+            $settings->put('reservedShortUrls', $reserved);
+
             Cache::put($cache_key, $settings, Carbon::now()->addDays(7));
         }
         return $settings;
