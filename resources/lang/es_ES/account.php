@@ -9,6 +9,7 @@
  */
 
 return [
+    'login_name' => 'Nombre/Email/mobile',
   'update_success' => '¡Cuenta actualizada con éxito!',
   'password' => [
     'success' => '¡Contraseña actualizada con éxito!',

@@ -9,6 +9,7 @@
  */
 
 return [
+    'login_name' => '用户名/邮箱/手机号',
   'update_success' => 'Account successfully updated!',
   'password' => [
     'success' => 'Password successfully updated!',
