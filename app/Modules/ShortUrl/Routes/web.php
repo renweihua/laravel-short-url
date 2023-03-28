@@ -18,6 +18,8 @@ Route::prefix('')->group(function() {
     Auth::routes(['verify' => true]);
     // 首页 - ok
     Route::get('/', 'HomeController@dashboard')->name('home');
+    // 设置默认语言包
+    Route::get('/set-language/{locale}', 'HomeController@setLanguage')->name('set.language');
     // ok
     Route::get('privacy-policy', 'PagesController@privacy')->name('privacy');
     // ok

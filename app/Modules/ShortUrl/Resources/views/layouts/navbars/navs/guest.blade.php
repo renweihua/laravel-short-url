@@ -31,6 +31,27 @@
                         <span class="nav-link-inner--text">{{ __('urlhum.dashboard') }}</span>
                     </a>
                 </li>
+                @if(isset($languages) && !empty($languages))
+                <li class="nav-item">
+                    <!-- User -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-language"></i>
+                            <span class="nav-link-inner--text"> 语言切换 </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">{{ __('urlhum.welcome') }}</h6>
+                            </div>
+                            @foreach($languages as $name => $language)
+                                <a href="{{ route('set.language', ['locale' => $language]) }}" class="dropdown-item">
+                                    <span>{{ $name }}</span>
+                                </a>
+                            @endforeach
+                        </div>
+                    </li>
+                </li>
+                @endif
                 @if ( setting('registration') )
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="{{ route('register') }}">

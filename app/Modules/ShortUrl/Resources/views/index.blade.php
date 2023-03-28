@@ -1,4 +1,4 @@
-@extends('shorturl::shorturl::layouts.master')
+@extends('shorturl::layouts.master')
 
 @section('content')
     <h1>Hello World</h1>
