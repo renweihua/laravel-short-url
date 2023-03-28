@@ -25,3 +25,35 @@ if ( !function_exists('formatting_timestamp') ) {
         return $str;
     }
 }
+
+if ( !function_exists('get_client_info') ) {
+    /**
+     * 获取IP与浏览器信息、语言
+     *
+     * @return array
+     */
+    function get_client_info() : array
+    {
+        if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) ) {
+            $XFF = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            $client_pos = strpos($XFF, ', ');
+            $client_ip = false !== $client_pos ? substr($XFF, 0, $client_pos) : $XFF;
+            unset($XFF, $client_pos);
+        } else $client_ip = $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? $_SERVER['LOCAL_ADDR'] ?? '0.0.0.0';
+        $client_lang = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 5) : '';
+        $client_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        return [
+            'ip'    => &$client_ip,
+            'lang'  => &$client_lang,
+            'agent' => &$client_agent,
+        ];
+    }
+}
+
+if ( !function_exists('get_ip') ) {
+    function get_ip() : string
+    {
+        $data = get_client_info();
+        return $data['ip'] ?? '';
+    }
+}

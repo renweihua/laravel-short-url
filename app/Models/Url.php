@@ -33,6 +33,12 @@ class Url extends Model
         $url->user_id = $user_id;
         $url->is_public = $is_public;
         $url->is_hidden = $is_hidden;
+
+        // 访问IP与浏览器信息
+        $ip_agent = get_client_info();
+        $url->created_ip = $ip_agent['ip'] ?? get_ip();
+        $url->browser_type = $ip_agent['agent'] ?? $_SERVER['HTTP_USER_AGENT'];
+
         $url->save();
 
         return (int) DB::getPdo()->lastInsertId();

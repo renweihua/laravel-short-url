@@ -26,6 +26,8 @@ class CreateUrlsTable extends Migration
             $table->boolean('is_hidden')->unsigned()->default(0)->comment('是否隐藏');
             $table->integer('created_time')->unsigned()->default(0)->comment('创建时间');
             $table->integer('updated_time')->unsigned()->default(0)->comment('更新时间');
+            $table->string('created_ip', 20)->default('')->comment('创建时的IP');
+            $table->string('browser_type', 300)->default('')->comment('创建时浏览器类型');
             $table->boolean('is_delete')->unsigned()->default(0)->comment('是否删除');
             $table->index('user_id');
             $table->unique('short_url');
