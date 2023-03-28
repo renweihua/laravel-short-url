@@ -30,7 +30,7 @@ class UrlService
     public function shortenUrl($long_url, $short_url, $privateUrl, $hideUrlStats): Url
     {
         $lock_key = 'lock:create:short:url:' . md5($long_url . $short_url);
-        $owner = Cache::lock($lock_key, 60);
+        $lock = Cache::lock($lock_key, 60);
 
         $url = Url::createShortUrl($long_url, $short_url, $privateUrl, $hideUrlStats);
         if (!$short_url) {
@@ -42,7 +42,8 @@ class UrlService
 
         $url = Url::assignShortUrlToUrl($url, $short_url);
 
-        Cache::restoreLock($lock_key, $owner);
+        Cache::restoreLock($lock_key, $lock->owner());
+
         return $url;
     }
 

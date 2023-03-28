@@ -47,9 +47,9 @@ class Setting extends Model
      */
     public static function getReservedUrls()
     {
-        $settings = setting('reservedShortUrls', []);
+        $settings = setting('reservedShortUrls', '');
 
-        return json_decode($settings, true, 512, JSON_THROW_ON_ERROR);
+        return $settings;
     }
 
     /**

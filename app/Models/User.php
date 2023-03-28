@@ -50,6 +50,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function urls()
     {
-        return $this->hasMany('App\Url', 'user_id', 'id');
+        return $this->hasMany(Url::class, 'user_id', 'id');
     }
 }
