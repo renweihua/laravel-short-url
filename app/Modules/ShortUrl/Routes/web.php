@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::prefix('')->group(function() {
     // Auth - ok
-    Auth::routes(['verify' => true]);
+    Auth::routes(['verify' => true, 'register' => false, 'reset' => false]);
     // 首页 - ok
     Route::get('/', 'HomeController@dashboard')->name('home');
     // 设置默认语言包
