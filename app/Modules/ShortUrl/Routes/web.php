@@ -14,24 +14,24 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::prefix('')->group(function() {
-    // Auth - ok
+    // Auth
     Auth::routes(['verify' => true]);
-    // 首页 - ok
+    // 首页
     Route::get('/', 'HomeController@dashboard')->name('home');
     // 设置默认语言包
     Route::get('/set-language/{locale}', 'HomeController@setLanguage')->name('set.language');
-    // ok
-    Route::get('privacy-policy', 'PagesController@privacy')->name('privacy');
-    // ok
-    Route::get('terms-of-use', 'PagesController@tos')->name('tos');
+    // 隐私政策
+    Route::get('privacy-policy', 'PageController@privacy')->name('privacy');
+    // 使用条款
+    Route::get('terms-of-use', 'PageController@tos')->name('tos');
 
 
     Route::group(['middleware' => 'auth'], function () {
-        // 编辑页 - ok
+        // 编辑页
         Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-        // 编辑账户信息 - ok
+        // 编辑账户信息
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-        // 更改登录密码 - ok
+        // 更改登录密码
         Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
         // 这种可生成对外的授权token，调用内部接口
@@ -43,7 +43,7 @@ Route::prefix('')->group(function() {
             ->middleware('verified');
 
         Route::group(['middleware' => 'admin'], function () {
-            // Admin - 会员列表 - ok
+            // Admin - 会员列表
             Route::resource('user', 'Admin\UserController', ['except' => ['show']]);
             // 系统配置
             Route::get('settings', ['as' => 'settings', 'uses' => 'SettingController@show']);
@@ -52,23 +52,23 @@ Route::prefix('')->group(function() {
     });
 
     Route::group(['prefix' => 'url'], function () {
-        // 批量创建页面 - ok
+        // 批量创建页面
         Route::get('multiple', 'UrlMultipleController@createMultiple')->name('multiple');
-        // 批量创建短域名 - ok
+        // 批量创建短域名
         Route::post('multiple', 'UrlMultipleController@storeMultiple')->name('store-multiple');
         // 验证短域名
         Route::post('short', 'UrlController@checkExistingUrl')->name('short')->name('url.short')
             ->middleware('verifycheck');
-        // 我的域名 - ok
+        // 我的域名
         Route::get('my', 'UrlController@getMyUrls')->middleware('auth')->name('url.my')
             ->middleware('verifycheck');
-        // 公开短域名 - ok
+        // 公开短域名
         Route::get('public', 'UrlController@publicUrls')->name('url.public');
 
 
-        // 管理员查看短链接列表 - ok
+        // 管理员查看短链接列表
         Route::get('list', 'UrlController@showUrlsList')->middleware('admin')->name('url.list');
-        // 管理员查看短链接列表的数据加载 - ok
+        // 管理员查看短链接列表的数据加载
         Route::get('list-load', 'UrlController@loadUrlsList')->middleware('admin')->name('url.list-load');
         Route::get('referers', 'AnalyticController@showReferrersList')->name('url.referers')->middleware('admin');
     });
@@ -76,10 +76,10 @@ Route::prefix('')->group(function() {
     // We use "show" in place of "edit", because the "real" show is /{url}
     Route::resource('url', 'UrlController')->except(['edit', 'index'])->middleware(['verifycheck', 'honeypot']);
 
-    // 短链接的详情统计页 - ok
+    // 短链接的详情统计页
     Route::get('/{url}+', 'AnalyticController@show')->name('stats');
     Route::get('/{url}.svg', 'QRCodeController@svg')->name('qrcode.svg');
     Route::get('/{url}.png', 'QRCodeController@png')->name('qrcode.png');
-    // 点击短链接 - ok
+    // 点击短链接
     Route::get('/{url}', 'UrlClickController@click')->name('click');
 });

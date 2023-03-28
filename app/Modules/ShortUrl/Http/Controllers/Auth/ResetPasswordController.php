@@ -11,9 +11,10 @@
 namespace App\Modules\ShortUrl\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Modules\ShortUrl\Http\Controllers\ShortUrlController;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
-class ResetPasswordController extends Controller
+class ResetPasswordController extends ShortUrlController
 {
     /*
     |--------------------------------------------------------------------------
@@ -42,6 +43,8 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest');
     }
 }

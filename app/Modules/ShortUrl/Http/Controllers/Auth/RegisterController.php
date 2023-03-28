@@ -12,11 +12,12 @@ namespace App\Modules\ShortUrl\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Modules\ShortUrl\Http\Controllers\ShortUrlController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-class RegisterController extends Controller
+class RegisterController extends ShortUrlController
 {
     /*
     |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest');
 
         if (! setting('registration')) {

@@ -11,9 +11,10 @@
 namespace App\Modules\ShortUrl\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Modules\ShortUrl\Http\Controllers\ShortUrlController;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-class ForgotPasswordController extends Controller
+class ForgotPasswordController extends ShortUrlController
 {
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest');
     }
 
