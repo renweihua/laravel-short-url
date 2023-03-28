@@ -187,4 +187,21 @@ class UrlController extends ShortUrlController
 
         return Redirect::route('url.my')->with(['success' => 'Short url "'.$url->short_url.'" deleted successfully. Its Analytics data has been deleted too.']);
     }
+
+    /**
+     * Response to an AJAX request by the custom Short URL form.
+     *
+     * @param Request $request
+     * @return ResponseFactory|Response
+     */
+    public function checkExistingUrl(Request $request)
+    {
+        if ($this->url->isUrlReserved($request->input) ||
+            Url::whereRaw('BINARY `short_url` = ?', [$request->input])->exists() ||
+            (! setting('deleted_urls_can_be_recreated') && $this->url->isUrlAlreadyDeleted($request->input)) || $this->url->isShortUrlProtected($request->input)) {
+            return response('Custom URL already existing', 409);
+        }
+
+        return response('ok');
+    }
 }

@@ -54,6 +54,7 @@ Route::prefix('')->group(function() {
         Route::get('multiple', 'UrlMultipleController@createMultiple')->name('multiple');
         // 批量创建短域名 - ok
         Route::post('multiple', 'UrlMultipleController@storeMultiple')->name('store-multiple');
+        // 验证短域名
         Route::post('short', 'UrlController@checkExistingUrl')->name('short')->name('url.short')
             ->middleware('verifycheck');
         // 我的域名 - ok
