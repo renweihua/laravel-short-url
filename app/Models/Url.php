@@ -20,7 +20,7 @@ class Url extends Model
      * @param $is_hidden
      * @return Url
      */
-    public static function createShortUrl($long_url, $short_url, $is_public = 1, $is_hidden = 0): int
+    public static function createShortUrl($long_url, $short_url, $is_public = 1, $is_hidden = 0): Url
     {
         $user_id = 0;
         if (Auth::check()) {
@@ -38,8 +38,9 @@ class Url extends Model
         $ip_agent = get_client_info();
         $url->created_ip = $ip_agent['ip'] ?? get_ip();
         $url->browser_type = $ip_agent['agent'] ?? $_SERVER['HTTP_USER_AGENT'];
+        $url->save();
 
-        return $url->save();
+        return $url;
     }
 
     public static function assignShortUrlToUrl(Url $url, string $shortUrl): Url
