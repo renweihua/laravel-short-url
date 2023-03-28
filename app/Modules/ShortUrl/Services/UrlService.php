@@ -76,7 +76,7 @@ class UrlService
         if ($this->checkExistingCustomUrl($url) ||
             $this->isShortUrlProtected($url) ||
             $this->isUrlReserved($url) ||
-            (! setting('deleted_urls_can_be_recreated') && ($this->isUrlAlreadyDeleted($url)))) {
+            (! setting('deleted_urls_can_be_recreated'))) {
             return true;
         }
 
@@ -176,22 +176,7 @@ class UrlService
 
         return in_array($url, $reservedUrls, true);
     }
-
-    /**
-     * Check if the typed URL has already been deleted before.
-     *
-     * @param $url
-     * @return bool
-     */
-    public function isUrlAlreadyDeleted($url): bool
-    {
-        return \DB::table('deleted_urls')
-            ->select('url')
-            ->whereRaw('BINARY `short_url` = ?', [$url])
-            ->exists();
-    }
-
-
+    
     /*
      * Let's assign at every URL the value sent by the form
      */

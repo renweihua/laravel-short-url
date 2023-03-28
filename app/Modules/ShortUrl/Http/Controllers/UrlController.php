@@ -196,7 +196,7 @@ class UrlController extends ShortUrlController
     {
         if ($this->url->isUrlReserved($request->input) ||
             Url::whereRaw('BINARY `short_url` = ?', [$request->input])->exists() ||
-            (! setting('deleted_urls_can_be_recreated') && $this->url->isUrlAlreadyDeleted($request->input)) || $this->url->isShortUrlProtected($request->input)) {
+            (! setting('deleted_urls_can_be_recreated')) || $this->url->isShortUrlProtected($request->input)) {
             return response('Custom URL already existing', 409);
         }
 
