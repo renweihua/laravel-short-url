@@ -19,9 +19,10 @@ $(document).ready(function () {
 
 
     $('#customUrl').keyup(delay(function (e) {
-        if($('#customUrl').val().length <= 3) {
+        let min_short_length = $('#customUrl').attr('min-short-length');
+        if($('#customUrl').val().length <= min_short_length) {
             container.addClass('has-danger');
-            $('#customUrlResult').text('Type a longer short URL');
+            $('#customUrlResult').text('请设置一个至少' + min_short_length + '位的短链接 | Type a longer short URL');
         } else {
             $('#customUrlResult').text('Loading...  ').append('<i class="fa fa-spinner"></i>');
             $.ajax({

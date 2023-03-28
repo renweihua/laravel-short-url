@@ -66,7 +66,7 @@
                                         <i class="ni ni-mobile-button"></i></a>
                                     <p class="text-right" id="customUrlResult"></p>
                                     <div class="form-group" id="customUrlcontainer">
-                                        <input type="text" class="form-control" id="customUrl" name="customUrl">
+                                        <input type="text" class="form-control" id="customUrl" name="customUrl" min-short-length="{{ setting('min_hash_length') }}">
                                     </div>
                                     <br>
                                     <label class="text-left" for="privateUrl" style="float:left;">{{ __('url.options.hide') }}</label>
