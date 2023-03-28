@@ -11,6 +11,7 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Hashids\Hashids;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
@@ -28,24 +29,30 @@ class UrlService
      */
     public function shortenUrl($long_url, $short_url, $privateUrl, $hideUrlStats): Url
     {
-        $createdUrlId = Url::createShortUrl($long_url, $short_url, $privateUrl, $hideUrlStats);
+        $lock_key = 'lock:create:short:url:' . md5($long_url . $short_url);
+        $owner = Cache::lock($lock_key, 60);
+
+        $url = Url::createShortUrl($long_url, $short_url, $privateUrl, $hideUrlStats);
         if (!$short_url) {
-            $short_url = $this->generateShortUrl($createdUrlId);
+            $short_url = $this->generateShortUrl($url);
             if (!$short_url) {
                 throw new RuntimeException();
             }
         }
 
-        return Url::assignShortUrlToUrl($createdUrlId, $short_url);
+        $url = Url::assignShortUrlToUrl($url, $short_url);
+
+        Cache::restoreLock($lock_key, $owner);
+        return $url;
     }
 
     /**
      * Generate an unique short URL using hashids. Salt is the APP_KEY, which is always unique.
      *
-     * @param int $id
+     * @param Url $url
      * @return string
      */
-    public function generateShortUrl(int $id): string
+    public function generateShortUrl($url): string
     {
         $checksQuantity = 0;
         do {
@@ -54,7 +61,7 @@ class UrlService
             }
             $hashLength = setting('min_hash_length') ?? 4;
             $hashids = new Hashids(env('APP_KEY'), $hashLength);
-            $encoded = $hashids->encode($id);
+            $encoded = $hashids->encode($url->id);
             $alreadyGenerated = false;
             if ($this->isUrlReserved($encoded) || Url::whereRaw('BINARY `short_url` = ?', [$encoded])->exists()) {
                 $alreadyGenerated = true;

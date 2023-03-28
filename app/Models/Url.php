@@ -44,9 +44,8 @@ class Url extends Model
         return (int) DB::getPdo()->lastInsertId();
     }
 
-    public static function assignShortUrlToUrl(int $urlId, string $shortUrl): Url
+    public static function assignShortUrlToUrl(Url $url, string $shortUrl): Url
     {
-        $url = self::find($urlId);
         $url->short_url = $shortUrl;
         $url->save();
 
