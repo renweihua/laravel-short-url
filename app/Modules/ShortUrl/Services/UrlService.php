@@ -183,28 +183,29 @@ class UrlService
 
         return in_array($url, $reservedUrls, true);
     }
-    
+
     /*
      * Let's assign at every URL the value sent by the form
      */
     /**
      * @param $request
-     * @param $short_url_id
+     * @param $url_id
      */
-    public function assignDeviceTargetUrl($request, $short_url_id): void
+    public function assignDeviceTargetUrl($request, $url_id): void
     {
         $data = [];
 
         $enums = DeviceTargetsEnum::all();
 
+        $time = time();
         foreach ($enums as $device) {
             if (isset($request[$device->name]) && $request[$device->name] !== null) {
                 $data[] = [
-                    'short_url_id' => $short_url_id,
-                    'device' => $device->id,
+                    'url_id' => $url_id,
+                    'device_id' => $device->id,
                     'target_url' => $request[$device->name],
-                    'created_time' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'created_time' => $time,
+                    'updated_time' => $time
                 ];
             }
         }
