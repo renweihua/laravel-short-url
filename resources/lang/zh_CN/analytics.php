@@ -26,16 +26,16 @@ return [
     'today' => '今日点击量',
     'real' => '真实点击量',
     'latest' => 'Latest Click',
-    'latests' => 'Latest Clicks',
+    'latests' => '最近点击记录',
     'na' => 'Sorry, we don\'t have enough data to display latest clicks.',
   ],
   'show' => [
     'title' => '短链接分析',
   ],
   'country' => [
-    'real' => 'Real Clicks By Country',
+    'real' => '按国家/地区划分的真实点击率',
     'na' => '抱歉，我们没有足够的数据来显示国家/地区的访问量，分享这个网址！',
-    'views' => 'Clicks By Country',
+    'views' => '点击次数（按国家/地区）',
   ],
   'url' => [
     'created' => '短链接数量',
