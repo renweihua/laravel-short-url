@@ -113,8 +113,6 @@ class UrlController extends ShortUrlController
         return view('shorturl::url.my')->with('urls', $urls);
     }
 
-
-
     /**
      * Show the "edit" form of the URL.
      * This method actually shows the URL edit page. It is not actually "@show" URL. The URL show is in clickUrl@view.

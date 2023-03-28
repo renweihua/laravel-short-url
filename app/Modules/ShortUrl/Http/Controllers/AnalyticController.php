@@ -3,13 +3,10 @@
 namespace App\Modules\ShortUrl\Http\Controllers;
 
 use App\Models\Url;
-use App\Models\User;
 use App\Modules\ShortUrl\Services\AnalyticService;
 use App\Modules\ShortUrl\Services\UrlService;
 use Carbon\Carbon;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
 class AnalyticController extends ShortUrlController
@@ -52,7 +49,7 @@ class AnalyticController extends ShortUrlController
             },
         ])->whereRaw('BINARY `short_url` = ?',  [$url])->firstOrFail();
 
-        if ($urlWithRelations->is_hidden && ! $this->url->OwnerOrAdmin($url)) {
+        if ($urlWithRelations->is_hidden && ! $this->url->OwnerOrAdmin($urlWithRelations)) {
             abort(403);
         }
 

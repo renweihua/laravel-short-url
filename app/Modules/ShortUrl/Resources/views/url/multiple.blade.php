@@ -69,11 +69,9 @@
                     <div id="options-panel" class="mt-3" style="display:none;">
                         <label class="text-left" for="privateUrl"
                                style="float:left;">{{ __('url.options.hide') }}</label>
-                        <div class="form-group text-right"
-                             id="privateUrlcontainer">
+                        <div class="form-group text-right" id="privateUrlcontainer">
                             <label class="custom-toggle">
-                                <input type="hidden" name="privateUrl"
-                                       value="0">
+                                <input type="hidden" name="privateUrl" value="0">
                                 <input type="checkbox" name="privateUrl" checked value="1">
                                 <span class="custom-toggle-slider rounded-circle"></span>
                             </label>
@@ -83,10 +81,8 @@
                         <div class="form-group text-right"
                              id="hideUrlStatscontainer">
                             <label class="custom-toggle">
-                                <input type="hidden" name="hideUrlStats"
-                                       value="0">
-                                <input type="checkbox" name="hideUrlStats"
-                                       value="1">
+                                <input type="hidden" name="hideUrlStats" value="0">
+                                <input type="checkbox" name="hideUrlStats" value="1">
                                 <span class="custom-toggle-slider rounded-circle"></span>
                             </label>
                         </div>

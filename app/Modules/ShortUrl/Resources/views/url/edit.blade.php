@@ -95,8 +95,7 @@
                                         <div class="form-group text-right" id="privateUrlcontainer">
                                             <label class="custom-toggle">
                                                 <input type="hidden" name="privateUrl" value="0">
-                                                <input type="checkbox" name="privateUrl" value="1"
-                                                       @if ($data['url']->is_public == 1) checked @endif >
+                                                <input type="checkbox" name="privateUrl" value="1" @if ($data['url']->is_public == 1) checked @endif >
                                                 <span class="custom-toggle-slider rounded-circle"></span>
                                             </label>
                                         </div>
