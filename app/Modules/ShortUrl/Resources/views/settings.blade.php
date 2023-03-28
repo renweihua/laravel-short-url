@@ -119,23 +119,6 @@
                                     </div>
 
                                     <div class="form-group row mb-5">
-                                        <label for="registration"
-                                               class="col-sm-4 col-md-6">
-                                            {{ __('settings.registration') }}
-                                        </label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <label class="custom-toggle float-right">
-                                                <input type="hidden" name="registration" value="0">
-                                                <input @if ($settings['registration'] == 1) checked
-                                                       @endif
-                                                       type="checkbox" name="registration"
-                                                       value="1">
-                                                <span class="custom-toggle-slider rounded-circle"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row mb-5">
                                         <label for="show_guests_latest_urls"
                                                class="col-sm-4 col-md-6">
                                             {{ __('settings.public') }}

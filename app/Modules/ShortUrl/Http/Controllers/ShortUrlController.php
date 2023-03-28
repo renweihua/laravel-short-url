@@ -25,6 +25,8 @@ class ShortUrlController extends Controller
 
         // 为所有视图共享数据
         View::share('languages', $this->languages);
+        // 注册域名
+        View::share('register_server', 'https://bbs.cnpscy.com/auth/register');
     }
 
     protected function getLanaguageCacheKey()

@@ -52,14 +52,12 @@
                     </li>
                 </li>
                 @endif
-                @if ( setting('registration') )
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('register') }}">
+                    <a class="nav-link nav-link-icon" target="_blank" href="{{ $register_server }}">
                         <i class="ni ni-circle-08"></i>
                         <span class="nav-link-inner--text">{{ __('urlhum.register') }}</span>
                     </a>
                 </li>
-                @endif
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="{{ route('login') }}">
                         <i class="ni ni-key-25"></i>

@@ -17,7 +17,6 @@ class SettingRequest extends FormRequest
         return [
             'website_name' => 'required|min:2|max:30',
             'anonymous_urls' => 'boolean',
-            'registration' => 'boolean',
             'private_site' => 'boolean',
             'unauthorized_redirect' => 'url|nullable',
             'show_guests_latests_urls' => 'boolean',

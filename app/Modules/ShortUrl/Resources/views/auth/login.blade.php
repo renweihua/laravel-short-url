@@ -59,13 +59,11 @@
                             </a>
                         @endif
                     </div>
-                    @if (setting('registration'))
-                        <div class="col-6 text-right">
-                            <a href="{{ route('register') }}" class="text-light">
-                                <small>{{ __('account.new') }}</small>
-                            </a>
-                        </div>
-                    @endif
+                    <div class="col-6 text-right">
+                        <a href="{{ $register_server }}" target="_blank" class="text-light">
+                            <small>{{ __('account.new') }}</small>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
