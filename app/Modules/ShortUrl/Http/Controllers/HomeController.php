@@ -5,12 +5,8 @@ namespace App\Modules\ShortUrl\Http\Controllers;
 use App\Models\Url;
 use App\Models\UrlClick;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
@@ -60,9 +56,11 @@ class HomeController extends ShortUrlController
             abort(400, '无效的语言包！');
         }
         // 设置语言包
-        Cache::put('language', $locale, Carbon::now()->addDays(30));
+        $this->setLanguageByUser($locale);
+
+        $show_locale = array_flip($this->languages)[$locale] ?? $locale;
 
         return Redirect::back()
-            ->with('change-language-success', '语言切换成功.');
+            ->with('change-language-success', '`' . $show_locale . '`语言包切换成功！');
     }
 }
