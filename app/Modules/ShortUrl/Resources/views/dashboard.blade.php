@@ -3,6 +3,9 @@
 @section('content')
     @include('shorturl::layouts.headers.cards')
     <div class="container-fluid col-lg-10 col-md-10 col-sm-12 mt--7">
+
+        <div class="alert alert-secondary">{{ __('urlhum.home_propose') }}</div>
+
         @if (Auth::check() || setting('anonymous_urls'))
             @include('shorturl::widgets/create-url')
         @endif
