@@ -93,10 +93,10 @@ class UrlService
     /**
      * Check if the logged in user is the URL Owner or an Admin.
      *
-     * @param $url
+     * @param Url $url
      * @return bool
      */
-    public function OwnerOrAdmin($url)
+    public function OwnerOrAdmin(Url $url)
     {
         return User::isAdmin() || $this->isOwner($url);
     }
@@ -104,10 +104,10 @@ class UrlService
     /**
      * Check if the logged in user is the Short URL owner.
      *
-     * @param $url
+     * @param Url $url
      * @return bool
      */
-    public function isOwner($url)
+    public function isOwner(Url $url)
     {
         if (! Auth::check()) {
             return false;
@@ -214,18 +214,15 @@ class UrlService
     }
 
     /**
-     * @param $short_url
+     * @param $url
      * @return Collection
      */
-    public function getTargets(Url $short_url)
+    public function getTargets(Url $url)
     {
-        return DB::table('device_targets_enums')
-            ->leftJoin('device_targets', static function($join) use ($short_url)
-            {
+        return DeviceTargetsEnum::leftJoin('device_targets', function ($join) use ($url){
                 $join->on('device_targets.device_id', '=', 'device_targets_enums.id');
-                $join->where('device_targets.target_url', '=', $short_url->id);
+                $join->where('device_targets.target_url', '=', $url->id);
             })
-            ->select('*')
             ->get();
     }
 

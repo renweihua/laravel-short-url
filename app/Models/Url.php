@@ -18,7 +18,7 @@ class Url extends Model
      * @param $short_url
      * @param $is_public
      * @param $is_hidden
-     * @return int
+     * @return Url
      */
     public static function createShortUrl($long_url, $short_url, $is_public = 1, $is_hidden = 0): int
     {
@@ -39,9 +39,7 @@ class Url extends Model
         $url->created_ip = $ip_agent['ip'] ?? get_ip();
         $url->browser_type = $ip_agent['agent'] ?? $_SERVER['HTTP_USER_AGENT'];
 
-        $url->save();
-
-        return (int) DB::getPdo()->lastInsertId();
+        return $url->save();
     }
 
     public static function assignShortUrlToUrl(Url $url, string $shortUrl): Url
