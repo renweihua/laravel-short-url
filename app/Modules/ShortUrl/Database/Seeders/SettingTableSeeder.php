@@ -33,11 +33,11 @@ class SettingTableSeeder extends Seeder
             ],
             [
                 'key' => 'hash_ip',
-                'value' => 1,
+                'value' => 0,
             ],
             [
                 'key' => 'anonymize_ip',
-                'value' => 1,
+                'value' => 0,
             ],
             [
                 'key' => 'disable_referers',
