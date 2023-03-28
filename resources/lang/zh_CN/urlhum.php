@@ -9,6 +9,8 @@
  */
 
 return [
+    'language_tips' => '可切换为所需的语言',
+    'change_language' => '语言切换',
     'home_propose' => '建议：登录账户再进行生成域名短链接的相关操作，则会归于账户，后期可进行编辑与管理。',
   'privacypolicy' => '隐私政策',
   'and' => '与',

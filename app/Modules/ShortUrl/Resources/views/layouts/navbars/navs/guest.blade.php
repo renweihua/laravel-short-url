@@ -37,11 +37,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-language"></i>
-                            <span class="nav-link-inner--text"> 语言切换 </span>
+                            <span class="nav-link-inner--text"> {{ __('urlhum.change_language') }} </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                             <div class=" dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">{{ __('urlhum.welcome') }}</h6>
+                                <h6 class="text-overflow m-0">{{ __('urlhum.language_tips') }}</h6>
                             </div>
                             @foreach($languages as $name => $language)
                                 <a href="{{ route('set.language', ['locale' => $language]) }}" class="dropdown-item">

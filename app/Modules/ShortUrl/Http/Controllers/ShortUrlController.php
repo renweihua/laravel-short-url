@@ -18,8 +18,9 @@ class ShortUrlController extends Controller
 
     public function __construct()
     {
-        if (Cache::has('language')){
-            App::setLocale(Cache::get($this->getLanaguageCacheKey()));
+        $cache_key = $this->getLanaguageCacheKey();
+        if (Cache::has($cache_key)){
+            App::setLocale(Cache::get($cache_key));
         }
 
         // 为所有视图共享数据
