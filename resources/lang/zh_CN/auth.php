@@ -9,6 +9,6 @@
  */
 
 return [
-  'failed' => '用户信息错误',
+  'failed' => '账户与密码登录失败',
   'throttle' => '尝试登录次数过多，请在  :seconds 秒后重试',
 ];
