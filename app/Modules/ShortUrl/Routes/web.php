@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Modules\ShortUrl\Http\Middleware\ViewShareLoginUserMiddleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::prefix('')->group(function() {
+Route::prefix('')->middleware(ViewShareLoginUserMiddleware::class)->group(function() {
     Auth::routes(['verify' => true, 'register' => false, 'reset' => false]);
     // 首页
     Route::get('/', 'HomeController@dashboard')->name('home');
