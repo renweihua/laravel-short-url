@@ -16,7 +16,7 @@ class ShortUrlDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(DeviceTargetEnumDatabaseSeeder::class);
-        $this->call(SettingTableSeeder::class);
+        $this->call(ShortDeviceTargetEnumDatabaseSeeder::class);
+        $this->call(ShortSettingTableSeeder::class);
     }
 }

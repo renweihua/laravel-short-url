@@ -2,11 +2,11 @@
 
 namespace App\Modules\ShortUrl\Services;
 
-use App\Models\UrlClick;
-use App\Models\DeviceTarget;
-use App\Models\DeviceTargetsEnum;
-use App\Models\Setting;
-use App\Models\Url;
+use App\Models\ShortUrlClick;
+use App\Models\ShortDeviceTarget;
+use App\Models\ShortDeviceTargetsEnum;
+use App\Models\ShortSetting;
+use App\Models\ShortUrl;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class AnalyticService
      */
     public static function getCountriesClicks($url_id)
     {
-        $countriesClicks = UrlClick::where('url_id', $url_id)
+        $countriesClicks = ShortUrlClick::where('url_id', $url_id)
             ->select('country_full', DB::raw('count(*) as views'), DB::raw('sum(real_click) as real_views'))
             ->groupBy('country_full')
             ->get();
@@ -64,7 +64,7 @@ class AnalyticService
      */
     public static function getUrlReferers($url_id)
     {
-        $referers = UrlClick::where('url_id', $url_id)
+        $referers = ShortUrlClick::where('url_id', $url_id)
             ->select('referer', DB::raw('sum(click+real_click) as clicks'), DB::raw('sum(real_click) as real_clicks'))
             ->groupBy('referer')
             ->orderBy('real_clicks', 'DESC')
@@ -81,7 +81,7 @@ class AnalyticService
      */
     public static function getLatestClicks($url_id)
     {
-        $clicks = UrlClick::where('url_id', $url_id)
+        $clicks = ShortUrlClick::where('url_id', $url_id)
             ->select('referer', 'created_time')
             ->orderBy('created_time', 'DESC')
             ->take(8)

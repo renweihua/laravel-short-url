@@ -2,8 +2,8 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers;
 
-use App\Models\Url;
-use App\Models\UrlClick;
+use App\Models\ShortUrl;
+use App\Models\ShortUrlClick;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Auth;
@@ -30,10 +30,10 @@ class HomeController extends ShortUrlController
         // We null the referers Widget to enable it just if the user is an admin and has referers enabled
         $referersWidget = null;
         if (!$anonymous && isAdmin() && !setting('disable_referers')) {
-            $referersWidget = UrlClick::referersWidget();
+            $referersWidget = ShortUrlClick::referersWidget();
         }
 
-        $publicWidget = Url::publicUrlsWidget();
+        $publicWidget = ShortUrl::publicUrlsWidget();
         if (! setting('show_guests_latests_urls') && $anonymous) {
             $publicWidget = null;
         }
@@ -41,9 +41,9 @@ class HomeController extends ShortUrlController
         return view('shorturl::dashboard', [
             'publicUrls' => $publicWidget,
             'referers' => $referersWidget,
-            'urlsCount' => Url::count(),
+            'urlsCount' => ShortUrl::count(),
             'usersCount' => User::count(),
-            'referersCount' => UrlClick::count(DB::raw('DISTINCT referer')),
+            'referersCount' => ShortUrlClick::count(DB::raw('DISTINCT referer')),
             'anonymous' => $anonymous,
             'anonymous_urls' => $anonymousUrls,
         ]);

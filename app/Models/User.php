@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function urls()
     {
-        return $this->hasMany(Url::class, 'user_id', 'user_id');
+        return $this->hasMany(ShortUrl::class, 'user_id', 'user_id');
     }
 
     public function userInfo()

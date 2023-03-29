@@ -2,10 +2,10 @@
 
 namespace App\Modules\ShortUrl\Services;
 
-use App\Models\DeviceTarget;
-use App\Models\DeviceTargetsEnum;
-use App\Models\Setting;
-use App\Models\Url;
+use App\Models\ShortDeviceTarget;
+use App\Models\ShortDeviceTargetsEnum;
+use App\Models\ShortSetting;
+use App\Models\ShortUrl;
 use App\Models\User;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
@@ -24,15 +24,16 @@ class UrlService
      * @param $short_url
      * @param $privateUrl
      * @param $hideUrlStats
-     * @return Url
+     *
+     * @return ShortUrl
      * @throws RuntimeException
      */
-    public function shortenUrl($long_url, $short_url, $privateUrl, $hideUrlStats): Url
+    public function shortenUrl($long_url, $short_url, $privateUrl, $hideUrlStats): ShortUrl
     {
         $lock_key = 'lock:create:short:url:' . md5($long_url . $short_url);
         $lock = Cache::lock($lock_key, 60);
 
-        $url = Url::createShortUrl($long_url, $short_url, $privateUrl, $hideUrlStats);
+        $url = ShortUrl::createShortUrl($long_url, $short_url, $privateUrl, $hideUrlStats);
         if (!$short_url) {
             $short_url = $this->generateShortUrl($url);
             if (!$short_url) {
@@ -40,7 +41,7 @@ class UrlService
             }
         }
 
-        $url = Url::assignShortUrlToUrl($url, $short_url);
+        $url = ShortUrl::assignShortUrlToUrl($url, $short_url);
 
         Cache::restoreLock($lock_key, $lock->owner());
 
@@ -50,7 +51,8 @@ class UrlService
     /**
      * Generate an unique short URL using hashids. Salt is the APP_KEY, which is always unique.
      *
-     * @param Url $url
+     * @param ShortUrl $url
+     *
      * @return string
      */
     public function generateShortUrl($url): string
@@ -64,7 +66,7 @@ class UrlService
             $hashids = new Hashids(env('APP_KEY'), $hashLength);
             $encoded = $hashids->encode($url->id);
             $alreadyGenerated = false;
-            if ($this->isUrlReserved($encoded) || Url::whereRaw('BINARY `short_url` = ?', [$encoded])->exists()) {
+            if ($this->isUrlReserved($encoded) || ShortUrl::whereRaw('BINARY `short_url` = ?', [$encoded])->exists()) {
                 $alreadyGenerated = true;
                 $checksQuantity++;
             }
@@ -94,10 +96,11 @@ class UrlService
     /**
      * Check if the logged in user is the URL Owner or an Admin.
      *
-     * @param Url $url
+     * @param ShortUrl $url
+     *
      * @return bool
      */
-    public function OwnerOrAdmin(Url $url)
+    public function OwnerOrAdmin(ShortUrl $url)
     {
         return User::isAdmin() || $this->isOwner($url);
     }
@@ -105,10 +108,11 @@ class UrlService
     /**
      * Check if the logged in user is the Short URL owner.
      *
-     * @param Url $url
+     * @param ShortUrl $url
+     *
      * @return bool
      */
-    public function isOwner(Url $url)
+    public function isOwner(ShortUrl $url)
     {
         if (! Auth::check()) {
             return false;
@@ -130,7 +134,7 @@ class UrlService
             return false;
         }
 
-        return Url::whereRaw('BINARY `short_url` = ?', [$custom_url])->exists() || $this->isUrlReserved($custom_url);
+        return ShortUrl::whereRaw('BINARY `short_url` = ?', [$custom_url])->exists() || $this->isUrlReserved($custom_url);
     }
 
     /**
@@ -141,7 +145,7 @@ class UrlService
      */
     public function checkExistingLongUrl($long_url)
     {
-        $long_url_check = Url::where('long_url', $long_url)->first();
+        $long_url_check = ShortUrl::where('long_url', $long_url)->first();
 
         if ($long_url_check === null) {
             return null;
@@ -154,7 +158,8 @@ class UrlService
      * Check if Short URL is protected / cannot be created
      * because it is a path.
      *
-     * @param url
+     * @param ShortUrl
+     *
      * @return bool
      */
     public function isShortUrlProtected($url): bool
@@ -176,7 +181,7 @@ class UrlService
      */
     public function isUrlReserved($url): bool
     {
-        $reservedUrls = Setting::getReservedUrls();
+        $reservedUrls = ShortSetting::getReservedUrls();
         // Check if there are any reserved URLs or if the custom URL isn't set
         if (!is_array($reservedUrls) || $url === null) {
             return false;
@@ -196,7 +201,7 @@ class UrlService
     {
         $data = [];
 
-        $enums = DeviceTargetsEnum::all();
+        $enums = ShortDeviceTargetsEnum::all();
 
         $time = time();
         foreach ($enums as $device) {
@@ -211,16 +216,16 @@ class UrlService
             }
         }
 
-        DeviceTarget::insert($data);
+        ShortDeviceTarget::insert($data);
     }
 
     /**
      * @param $url
      * @return Collection
      */
-    public function getTargets(Url $url)
+    public function getTargets(ShortUrl $url)
     {
-        return DeviceTargetsEnum::leftJoin('device_targets', function ($join) use ($url){
+        return ShortDeviceTargetsEnum::leftJoin('device_targets', function ($join) use ($url){
                 $join->on('device_targets.device_id', '=', 'device_targets_enums.id');
                 $join->where('device_targets.target_url', '=', $url->id);
             })
@@ -232,7 +237,7 @@ class UrlService
      * @param $short_url
      * @return bool|string
      */
-    public function getLongUrl(Url $short_url)
+    public function getLongUrl(ShortUrl $short_url)
     {
         $deviceDetection = new DeviceDetection();
 

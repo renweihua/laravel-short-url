@@ -2,8 +2,8 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers\Admin;
 
-use App\Models\Url;
-use App\Models\UrlClick;
+use App\Models\ShortUrl;
+use App\Models\ShortUrlClick;
 use App\Modules\ShortUrl\Http\Controllers\ShortUrlController;
 use App\Modules\ShortUrl\Http\Requests\ShortUrlRequest;
 use App\Modules\ShortUrl\Services\UrlService;
@@ -33,6 +33,7 @@ class UrlController extends ShortUrlController
      */
     public function __construct(UrlService $urlService)
     {
+        parent::__construct();
         $this->url = $urlService;
     }
 
@@ -57,7 +58,7 @@ class UrlController extends ShortUrlController
         // Here we add a column with the buttons to show analytics and edit short URLs.
         // There could be a better way to do this.
         // TODO: Really NEED to find a better way to handle this. It's horrible.
-        $dataTable = DataTables::of(Url::with('user:id,email')->orderByDesc('id')->get())
+        $dataTable = DataTables::of(ShortUrl::with('user:user_id')->orderByDesc('id')->get())
             ->addColumn('action', function ($row) {
                 return '<a href="/'.$row->short_url.'+"><button type="button" class="btn btn-secondary btn-sm btn-url-analytics"><i class="fa fa-chart-bar" alt="Analytics"> </i> '.trans('analytics.analytics').'</button></a> &nbsp;
                        <a href="/url/'.$row->short_url.'"><button type="button" class="btn btn-success btn-sm btn-url-edit"><i class="fa fa-pencil-alt" alt="Edit"> </i>'.trans('urlhum.edit').'</button></a>';

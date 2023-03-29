@@ -2,7 +2,7 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers;
 
-use App\Models\Url;
+use App\Models\ShortUrl;
 use App\Modules\ShortUrl\Services\AnalyticService;
 use App\Modules\ShortUrl\Services\UrlService;
 use Carbon\Carbon;
@@ -39,7 +39,7 @@ class AnalyticController extends ShortUrlController
      */
     public function show($url)
     {
-        $urlWithRelations = Url::withCount([
+        $urlWithRelations = ShortUrl::withCount([
             'clicks',
             'clicks as real_clicks_count' => function ($query) {
                 $query->where('real_click', 1);

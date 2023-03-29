@@ -10,7 +10,7 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers;
 
-use App\Models\Url;
+use App\Models\ShortUrl;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -35,7 +35,7 @@ class QRCodeController
      */
     public function svg(string $shortUrl)
     {
-        $url = Url::whereRaw('BINARY `short_url` = ?', [$shortUrl])->firstOrFail();
+        $url = ShortUrl::whereRaw('BINARY `short_url` = ?', [$shortUrl])->firstOrFail();
         return $this->qrCode($url, 'svg', 'image/svg+xml');
     }
 
@@ -48,18 +48,19 @@ class QRCodeController
      */
     public function png(string $shortUrl)
     {
-        $url = Url::whereRaw('BINARY `short_url` = ?', [$shortUrl])->firstOrFail();
+        $url = ShortUrl::whereRaw('BINARY `short_url` = ?', [$shortUrl])->firstOrFail();
         return $this->qrCode($url, 'png', 'image/png');
     }
 
     /**
-     * @param Url $url
+     * @param ShortUrl $url
      * @param $format
      * @param $contentType
+     *
      * @return Application|ResponseFactory|Response
      * @throws FileNotFoundException
      */
-    private function qrCode(Url $url, $format, $contentType)
+    private function qrCode(ShortUrl $url, $format, $contentType)
     {
         $path = 'qrcodes/'.$url->short_url.'.'.$format;
         if (Storage::exists($path)) {

@@ -2,10 +2,10 @@
 
 namespace App\Modules\ShortUrl\Database\Seeders;
 
-use App\Models\DeviceTargetsEnum;
+use App\Models\ShortDeviceTargetsEnum;
 use Illuminate\Database\Seeder;
 
-class DeviceTargetEnumDatabaseSeeder extends Seeder
+class ShortDeviceTargetEnumDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -33,7 +33,7 @@ class DeviceTargetEnumDatabaseSeeder extends Seeder
             ]
         ];
         foreach ($data as $item){
-            DeviceTargetsEnum::create($item);
+            ShortDeviceTargetsEnum::create($item);
         }
     }
 }

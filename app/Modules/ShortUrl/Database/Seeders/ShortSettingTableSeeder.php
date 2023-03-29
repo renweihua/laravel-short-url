@@ -2,10 +2,10 @@
 
 namespace App\Modules\ShortUrl\Database\Seeders;
 
-use App\Models\Setting;
+use App\Models\ShortSetting;
 use Illuminate\Database\Seeder;
 
-class SettingTableSeeder extends Seeder
+class ShortSettingTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -89,7 +89,7 @@ class SettingTableSeeder extends Seeder
             ],
         ];
         foreach ($settings as $item){
-            Setting::create($item);
+            ShortSetting::create($item);
         }
     }
 }

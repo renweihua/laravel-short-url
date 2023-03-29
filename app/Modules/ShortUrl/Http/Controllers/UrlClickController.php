@@ -3,8 +3,8 @@
 namespace App\Modules\ShortUrl\Http\Controllers;
 
 use App\Library\IpAnonymizer;
-use App\Models\Url;
-use App\Models\UrlClick;
+use App\Models\ShortUrl;
+use App\Models\ShortUrlClick;
 use App\Modules\ShortUrl\Http\Requests\ShortUrlRequest;
 use App\Modules\ShortUrl\Services\UrlService;
 use GeoIp2\Database\Reader;
@@ -27,7 +27,7 @@ class UrlClickController extends ShortUrlController
     {
         $urlService = new UrlService();
 
-        $urlRecord = Url::whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
+        $urlRecord = ShortUrl::whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
         if ($urlRecord) {
             $externalUrl = $urlService->getLongUrl($urlRecord);
         }
@@ -59,7 +59,7 @@ class UrlClickController extends ShortUrlController
         $click = 1;
         $real_click = 0;
 
-        if (UrlClick::realClick($urlRecord->id, $ip)) {
+        if (ShortUrlClick::realClick($urlRecord->id, $ip)) {
             $click = 0;
             $real_click = 1;
         }
@@ -81,7 +81,7 @@ class UrlClickController extends ShortUrlController
             'ip_anonymized' => $anonymized,
         ];
 
-        UrlClick::store($data);
+        ShortUrlClick::store($data);
 
         return Redirect::away($externalUrl);
     }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class UrlClick extends Model
+class ShortUrlClick extends Model
 {
     /**
      * Store a new Click in database.
