@@ -118,7 +118,7 @@ class UrlService
             return false;
         }
 
-        return $url->user_id === Auth::user()->id;
+        return $url->user_id === Auth::id();
     }
 
     /**
