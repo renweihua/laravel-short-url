@@ -37,7 +37,7 @@ class ShortSettingTableSeeder extends Seeder
             ],
             [
                 'key' => 'disable_referers',
-                'value' => 1,
+                'value' => 0,
             ],
             [
                 'key' => 'reservedShortUrls',
