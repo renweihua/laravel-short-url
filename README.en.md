@@ -17,3 +17,8 @@
 4. 数据表迁移 `php artisan migrate`
 5. 数据填充 `php artisan module:seed ShortUrl`
 6. 创建`Storage`目录软链接 `php artisan storage:link`
+
+
+#### 使用说明
+- 请务必使用`master`分支
+- `self-master`是共用自己的数据库
