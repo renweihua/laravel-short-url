@@ -17,7 +17,7 @@ class UserRequest extends FormRequest
     public function authorize()
     {
         $user = auth();
-        return $user->check() && $user->user()->role == 'admin';
+        return $user->check() && $user->user()->user_id == 1;
     }
 
     /**
@@ -32,7 +32,7 @@ class UserRequest extends FormRequest
                 'required', 'min:3',
             ],
             'email' => [
-                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null),
+                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->user_id ?? null),
             ],
             'password' => [
                 $this->route()->user ? 'nullable' : 'required', 'confirmed', 'min:6',
