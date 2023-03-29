@@ -72,7 +72,7 @@
                     {data: 'long_url', name: 'long_url'},
                     {data: 'short_url', name: 'short_url'},
                     {data: 'user.email', name: 'user.email'},
-                    {data: 'created_time', name: 'created_time'},
+                    {data: 'show_created_time', name: 'created_time'},
                     {data: 'action', name: 'action'}
                 ],
                 columnDefs: [{

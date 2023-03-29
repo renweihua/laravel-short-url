@@ -59,7 +59,13 @@ class UrlController extends ShortUrlController
         // Here we add a column with the buttons to show analytics and edit short URLs.
         // There could be a better way to do this.
         // TODO: Really NEED to find a better way to handle this. It's horrible.
-        $dataTable = DataTables::of(Url::with('user:id,email')->orderByDesc('id')->get())
+        $lists = Url::with('user:id,email')->orderByDesc('id')->get();
+
+        foreach ($lists as $item){
+            $item->show_created_time = formatting_timestamp($item->created_time);
+        }
+
+        $dataTable = DataTables::of($lists)
             ->addColumn('action', function ($row) {
                 return '<a href="/'.$row->short_url.'+"><button type="button" class="btn btn-secondary btn-sm btn-url-analytics"><i class="fa fa-chart-bar" alt="Analytics"> </i> '.trans('analytics.analytics').'</button></a> &nbsp;
                        <a href="/url/'.$row->short_url.'"><button type="button" class="btn btn-success btn-sm btn-url-edit"><i class="fa fa-pencil-alt" alt="Edit"> </i>'.trans('urlhum.edit').'</button></a>';
