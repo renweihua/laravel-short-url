@@ -24,7 +24,7 @@ class Url extends Model
     {
         $user_id = 0;
         if (Auth::check()) {
-            $user_id = Auth::user()->id;
+            $user_id = Auth::id();
         }
 
         $url = new self;
@@ -94,7 +94,7 @@ class Url extends Model
             abort(404);
         }
 
-        $user_id = Auth::user()->id;
+        $user_id = Auth::id();
 
         return self::where('user_id', $user_id)->paginate(30);
     }
