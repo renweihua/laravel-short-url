@@ -34,6 +34,7 @@ class UrlController extends ShortUrlController
     public function __construct(UrlService $urlService)
     {
         parent::__construct();
+        
         $this->url = $urlService;
     }
 

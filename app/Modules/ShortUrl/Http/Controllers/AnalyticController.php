@@ -27,6 +27,8 @@ class AnalyticController extends ShortUrlController
      */
     public function __construct(UrlService $urlService, AnalyticService $analytics)
     {
+        parent::__construct();
+
         $this->url = $urlService;
         $this->analytics = $analytics;
     }
