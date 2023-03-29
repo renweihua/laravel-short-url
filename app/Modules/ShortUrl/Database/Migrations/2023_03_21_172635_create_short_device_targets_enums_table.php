@@ -39,6 +39,6 @@ class CreateShortDeviceTargetsEnumsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('device_targets_enums');
+        Schema::dropIfExists('short_device_targets_enums');
     }
 }

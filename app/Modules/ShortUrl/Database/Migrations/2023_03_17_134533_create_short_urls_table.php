@@ -45,6 +45,6 @@ class CreateShortUrlsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('urls');
+        Schema::dropIfExists('short_urls');
     }
 }

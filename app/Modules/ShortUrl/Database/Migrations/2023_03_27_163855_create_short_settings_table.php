@@ -39,6 +39,6 @@ class CreateShortSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('short_settings');
     }
 }

@@ -225,9 +225,9 @@ class UrlService
      */
     public function getTargets(ShortUrl $url)
     {
-        return ShortDeviceTargetsEnum::leftJoin('device_targets', function ($join) use ($url){
-                $join->on('device_targets.device_id', '=', 'device_targets_enums.id');
-                $join->where('device_targets.target_url', '=', $url->id);
+        return ShortDeviceTargetsEnum::leftJoin('short_device_targets', function ($join) use ($url){
+                $join->on('short_device_targets.device_id', '=', 'short_device_targets_enums.id');
+                $join->where('short_device_targets.target_url', '=', $url->id);
             })
             ->get();
     }

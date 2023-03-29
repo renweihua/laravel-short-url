@@ -13,7 +13,6 @@
                         </div>
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf
-                            {{ $errors }}
                             <div class="form-group{{ $errors->has('user_name') ? ' has-danger' : '' }} mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">

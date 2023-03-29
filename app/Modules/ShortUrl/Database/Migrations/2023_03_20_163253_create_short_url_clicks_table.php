@@ -48,6 +48,6 @@ class CreateShortUrlClicksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('url_clicks');
+        Schema::dropIfExists('short_url_clicks');
     }
 }

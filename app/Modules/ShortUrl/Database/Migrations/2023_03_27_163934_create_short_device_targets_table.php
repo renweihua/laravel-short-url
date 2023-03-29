@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Support\Facades\DB;
 
 class CreateShortDeviceTargetsTable extends Migration
 {
@@ -40,6 +41,6 @@ class CreateShortDeviceTargetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('device_targets');
+        Schema::dropIfExists('short_device_targets');
     }
 }
