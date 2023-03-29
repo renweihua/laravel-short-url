@@ -28,10 +28,6 @@ Route::prefix('')->middleware(ViewShareLoginUserMiddleware::class)->group(functi
 
 
     Route::group(['middleware' => 'auth'], function () {
-        // 编辑页
-        Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-        // 编辑账户信息
-        Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
         // 更改登录密码
         Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
