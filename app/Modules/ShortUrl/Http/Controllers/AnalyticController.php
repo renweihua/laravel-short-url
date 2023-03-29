@@ -3,6 +3,7 @@
 namespace App\Modules\ShortUrl\Http\Controllers;
 
 use App\Models\Url;
+use App\Models\UrlClick;
 use App\Modules\ShortUrl\Services\AnalyticService;
 use App\Modules\ShortUrl\Services\UrlService;
 use Carbon\Carbon;
@@ -69,5 +70,19 @@ class AnalyticController extends ShortUrlController
         ];
 
         return view('shorturl::analytics.urlAnalytics')->with($data);
+    }
+
+    /**
+     * Show the referers list to the user.
+     *
+     * @return Factory|View
+     */
+    public function showReferrersList()
+    {
+        if (setting('disable_referers')) {
+            abort(404);
+        }
+
+        return view('shorturl::analytics.referrers')->with('referrers', UrlClick::getReferersList());
     }
 }
