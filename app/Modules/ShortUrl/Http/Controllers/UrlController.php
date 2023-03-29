@@ -31,6 +31,8 @@ class UrlController extends ShortUrlController
      */
     public function __construct(UrlService $urlService)
     {
+        parent::__construct();
+
         $this->middleware('throttle:30', ['only' => ['store', 'update', 'checkExistingUrl']]);
 
         $this->url = $urlService;
