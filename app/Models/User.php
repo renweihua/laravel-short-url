@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -40,11 +41,12 @@ class User extends Authenticatable
      */
     public static function isAdmin()
     {
-        if (! auth()->user()) {
+        $user_id = Auth::id();
+        if (!$user_id) {
             return false;
         }
 
-        if (auth()->user()->user_id == 1) {
+        if ($user_id == 1) {
             return true;
         }
 

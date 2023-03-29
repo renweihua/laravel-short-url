@@ -17,7 +17,7 @@ class UserRequest extends FormRequest
     public function authorize()
     {
         $user = auth();
-        return $user->check() && $user->user()->user_id == 1;
+        return $user->check() && $user->id() == 1;
     }
 
     /**
