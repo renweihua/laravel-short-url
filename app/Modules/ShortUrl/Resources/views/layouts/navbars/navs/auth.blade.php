@@ -20,16 +20,12 @@
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{ $login_user->userInfo->nick_name ?? $login_user->user_name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('urlhum.welcome') }}</h6>
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                        <i class="ni ni-single-02"></i>
-                        <span>{{ __('urlhum.account') }}</span>
-                    </a>
                     <a href="{{ route('url.my') }}" class="dropdown-item">
                         <i class="fa fa-list-alt"></i>
                         <span>{{ __('url.my.my') }}</span>

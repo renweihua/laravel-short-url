@@ -59,7 +59,7 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                        @if ($user->user_id != auth()->id())
+                                                        @if ($user->user_id != $login_user->user_id)
                                                             <form action="{{ route('user.destroy', $user) }}"
                                                                   method="post">
                                                                 @csrf
@@ -72,9 +72,6 @@
                                                                     {{ __('account.delete.delete') }}
                                                                 </button>
                                                             </form>
-                                                        @else
-                                                            <a class="dropdown-item"
-                                                               href="{{ route('profile.edit') }}">{{ __('urlhum.edit') }}</a>
                                                         @endif
                                                     </div>
                                                 </div>

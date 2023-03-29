@@ -18,10 +18,6 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('urlhum.welcome') }}</h6>
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                        <i class="ni ni-single-02"></i>
-                        <span>{{ __('urlhum.account') }}</span>
-                    </a>
                     <a href="{{ route('url.my') }}" class="dropdown-item">
                         <i class="fa fa-list-alt"></i>
                         <span>{{ __('url.my.my') }}</span>
@@ -71,11 +67,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('urlhum.home') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('profile.edit') }}">
-                        <i class="ni ni-single-02 text-yellow"></i> {{ __('urlhum.account') }}
                     </a>
                 </li>
                 <li class="nav-item">
