@@ -59,16 +59,28 @@ class UrlController extends ShortUrlController
         // Here we add a column with the buttons to show analytics and edit short URLs.
         // There could be a better way to do this.
         // TODO: Really NEED to find a better way to handle this. It's horrible.
-        $lists = ShortUrl::with('user')->orderByDesc('id')->get();
+        $lists = ShortUrl::with('user.userInfo')->orderByDesc('id')->get();
 
         foreach ($lists as $item){
             $item->show_created_time = formatting_timestamp($item->created_time);
         }
+        if ($lists){
+            $lists = $lists->toArray();
+            foreach ($lists as &$item){
+                if (!$item['user']){
+                    $item['user'] = [
+                        'user_info' => [
+                            'nick_name' => '游客'
+                        ]
+                    ];
+                }
+            }
+        }
 
         $dataTable = DataTables::of($lists)
             ->addColumn('action', function ($row) {
-                return '<a href="/'.$row->short_url.'+"><button type="button" class="btn btn-secondary btn-sm btn-url-analytics"><i class="fa fa-chart-bar" alt="Analytics"> </i> '.trans('analytics.analytics').'</button></a> &nbsp;
-                       <a href="/url/'.$row->short_url.'"><button type="button" class="btn btn-success btn-sm btn-url-edit"><i class="fa fa-pencil-alt" alt="Edit"> </i>'.trans('urlhum.edit').'</button></a>';
+                return '<a href="/'.$row['short_url'].'+"><button type="button" class="btn btn-secondary btn-sm btn-url-analytics"><i class="fa fa-chart-bar" alt="Analytics"> </i> '.trans('analytics.analytics').'</button></a> &nbsp;
+                       <a href="/url/'.$row['short_url'].'"><button type="button" class="btn btn-success btn-sm btn-url-edit"><i class="fa fa-pencil-alt" alt="Edit"> </i>'.trans('urlhum.edit').'</button></a>';
             })
             ->rawColumns(['action'])
             ->make(true);

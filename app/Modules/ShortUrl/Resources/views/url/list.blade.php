@@ -71,7 +71,7 @@
                     {data: 'id', name: 'id'},
                     {data: 'long_url', name: 'long_url'},
                     {data: 'short_url', name: 'short_url'},
-                    {data: 'user.email', name: 'user.email'},
+                    {data: 'user.user_info.nick_name', name: '昵称'},
                     {data: 'show_created_time', name: 'created_time'},
                     {data: 'action', name: 'action'}
                 ],

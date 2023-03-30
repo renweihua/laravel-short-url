@@ -118,10 +118,7 @@ class ShortUrl extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id')
-            ->withDefault(function ($user) {
-                $user->email = 'Anonymous';
-            });
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     /**
