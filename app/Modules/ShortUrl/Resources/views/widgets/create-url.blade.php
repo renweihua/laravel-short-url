@@ -60,6 +60,11 @@
 
                             <div id="options-panel" class="card mt-3" style="display:none;">
                                 <div class="card-body">
+                                    <label class="text-left" for="website_name" style="float:left;">{{ __('url.website_name') }}</label>
+                                    <div class="form-group" id="customUrlcontainer">
+                                        <input type="text" class="form-control" id="website_name" name="website_name" max="10">
+                                    </div>
+                                    <br>
                                     <label class="text-left" for="customUrl" style="float:left;">{{ __('url.options.custom') }}</label>
                                         <a id="retarget-device" data-toggle="modal" data-target="#targetModal" class="ml-4 btn btn-sm btn-info text-white">
                                             Retarget

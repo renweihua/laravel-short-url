@@ -9,6 +9,7 @@
  */
 
 return [
+    'website_name' => 'Site Name',
   'list' => 'Lista URL',
   'edit' => [
     'edit' => 'Modifica URL',

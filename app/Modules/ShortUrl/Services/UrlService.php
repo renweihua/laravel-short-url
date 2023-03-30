@@ -28,12 +28,12 @@ class UrlService
      * @return ShortUrl
      * @throws RuntimeException
      */
-    public function shortenUrl($long_url, $short_url, $privateUrl, $hideUrlStats): ShortUrl
+    public function shortenUrl($long_url, $short_url, $privateUrl, $hideUrlStats, $website_name = ''): ShortUrl
     {
         $lock_key = 'lock:create:short:url:' . md5($long_url . $short_url);
         $lock = Cache::lock($lock_key, 60);
 
-        $url = ShortUrl::createShortUrl($long_url, $short_url, $privateUrl, $hideUrlStats);
+        $url = ShortUrl::createShortUrl($long_url, $short_url, $website_name, $privateUrl, $hideUrlStats);
         if (!$short_url) {
             $short_url = $this->generateShortUrl($url);
             if (!$short_url) {

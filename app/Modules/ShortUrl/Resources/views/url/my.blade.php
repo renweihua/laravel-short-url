@@ -1,7 +1,7 @@
 @extends('shorturl::layouts.app',  ['title' => trans('url.my.my')])
 @section('content')
-    <div class="header bg-gradient-primary mb-3 pt-6 	d-none d-lg-block d-md-block pt-md-7"></div>
-    <div class="container-fluid col-lg-8 col-md-10 col-sm-12">
+    <div class="header bg-gradient-primary mb-3 pt-6 d-none d-lg-block d-md-block pt-md-7"></div>
+    <div class="container-fluid col-lg-12 col-md-12 col-sm-12">
         <div class="header-body">
             <div class="card">
                 <div class="row">
@@ -38,6 +38,7 @@
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
                                     <tr>
+                                        <th scope="col">{{ __('url.website_name') }}</th>
                                         <th scope="col">{{ __('url.short') }}</th>
                                         <th scope="col">{{ __('url.long') }}</th>
                                         <th scope="col"></th>
@@ -47,10 +48,13 @@
                                     @foreach ($urls as $url)
                                         <tr>
                                             <td>
+                                                {{$url->website_name}}
+                                            </td>
+                                            <td>
                                                 <a href="/{{$url->short_url}}">{{$url->short_url}}</a>
                                             </td>
                                             <td>
-                                                <a href="{{$url->long_url}}">{{$url->long_url}}</a>
+                                                <a href="{{$url->long_url}}" target="_blank">{{$url->long_url}}</a>
                                             </td>
                                             <td class="text-right">
                                                 <a href="/{{$url->short_url}}+">

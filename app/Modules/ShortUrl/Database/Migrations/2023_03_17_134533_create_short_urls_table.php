@@ -20,6 +20,7 @@ class CreateShortUrlsTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->bigInteger('user_id')->unsigned()->default(0)->comment('会员Id');
+            $table->string('website_name', 200)->default('')->comment('站点名称');
             $table->string('long_url', 200)->default('')->comment('长域名');
             $table->string('short_url', 200)->default('')->comment('短域名');
             $table->boolean('is_public')->unsigned()->default(1)->comment('是否公开');

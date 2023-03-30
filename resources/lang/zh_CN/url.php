@@ -9,6 +9,12 @@
  */
 
 return [
+    'website_name' => '站点名称',
+    'multiple' => [
+        'title' => '创建多个链接',
+        'new' => '创建新的短链接',
+        'description' => '粘贴多个URL，每行一个'
+    ],
   'list' => 'URL 列表',
   'edit' => [
     'edit' => '编辑 URL',

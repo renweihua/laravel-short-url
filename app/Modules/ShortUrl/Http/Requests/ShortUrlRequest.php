@@ -15,6 +15,7 @@ class ShortUrlRequest extends FormRequest
     public function rules()
     {
         return [
+            'website_name' => 'nullable|string|max:100',
             'url' => 'required|max:500|url',
             'customUrl' => 'nullable|min:4|max:15|regex:/^[-a-zA-Z0-9_]+$/',
             'privateUrl' => 'boolean',

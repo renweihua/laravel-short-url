@@ -21,7 +21,7 @@ class ShortUrl extends Model
      *
      * @return ShortUrl
      */
-    public static function createShortUrl($long_url, $short_url, $is_public = 1, $is_hidden = 0): ShortUrl
+    public static function createShortUrl($long_url, $short_url, $website_name, $is_public = 1, $is_hidden = 0): ShortUrl
     {
         $user_id = 0;
         if (Auth::check()) {
@@ -29,6 +29,7 @@ class ShortUrl extends Model
         }
 
         $url = new self;
+        if ($website_name) $url->website_name = $website_name;
         $url->long_url = $long_url;
         if ($short_url) $url->short_url = $short_url;
         $url->user_id = $user_id;
@@ -60,7 +61,7 @@ class ShortUrl extends Model
     public static function getLatestPublicUrls(): LengthAwarePaginator
     {
         return self::where('is_public', '=', 1)
-            ->select('short_url', 'long_url', 'created_time')
+            ->select('short_url', 'long_url', 'website_name', 'created_time')
             ->withCount(['clicks as clicks'])
             ->groupBy('short_url', 'long_url', 'created_time')
             ->orderBy('created_time', 'DESC')
@@ -76,7 +77,7 @@ class ShortUrl extends Model
     public static function publicUrlsWidget()
     {
         return self::where('is_public', '=', 1)
-            ->select(['short_url', 'long_url', 'created_time'])
+            ->select(['short_url', 'long_url', 'website_name', 'created_time'])
             ->withCount(['clicks as clicks'])
             ->groupBy('short_url', 'long_url', 'created_time')
             ->orderBy('created_time', 'DESC')
