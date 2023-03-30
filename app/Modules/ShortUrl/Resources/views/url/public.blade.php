@@ -21,6 +21,7 @@
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
                                     <tr>
+                                        <th scope="col">{{ __('url.website_name') }}</th>
                                         <th scope="col">{{ __('url.short')  }}</th>
                                         <th scope="col">{{ __('url.long') }}</th>
                                         <th scope="col">{{ __('analytics.analytics') }}</th>
@@ -30,10 +31,13 @@
                                     @foreach ($urls as $url)
                                         <tr>
                                             <td>
+                                                {{$url->website_name}}
+                                            </td>
+                                            <td>
                                                 <a href="/{{$url->short_url}}">{{$url->short_url}}</a>
                                             </td>
                                             <td>
-                                                <a href="{{$url->long_url}}">{{$url->long_url}}</a>
+                                                <a href="{{$url->long_url}}" target="_blank">{{$url->long_url}}</a>
                                             </td>
                                             <td>
                                                 <a href="/{{$url->short_url}}+" class="mr-2">
