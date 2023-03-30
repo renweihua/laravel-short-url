@@ -1,7 +1,7 @@
 @extends('shorturl::layouts.app',  ['title' => trans('url.list')])
 @section('content')
     <div class="header bg-gradient-primary mb-3 pt-6 d-none d-lg-block d-md-block pt-md-7"></div>
-    <div class="container-fluid col-lg-12 col-md-12 col-sm-12 ">
+    <div class="container-fluid col-lg-12 col-md-12 col-sm-12">
         <div class="header-body">
             <div class="row">
                 <div class="container-fluid">
@@ -72,7 +72,7 @@
                     {data: 'long_url', name: 'long_url'},
                     {data: 'short_url', name: 'short_url'},
                     {data: 'user.email', name: 'user.email'},
-                    {data: 'created_time', name: 'created_time'},
+                    {data: 'show_created_time', name: 'created_time'},
                     {data: 'action', name: 'action'}
                 ],
                 columnDefs: [{

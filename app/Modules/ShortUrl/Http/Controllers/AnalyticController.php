@@ -70,4 +70,18 @@ class AnalyticController extends ShortUrlController
 
         return view('shorturl::analytics.urlAnalytics')->with($data);
     }
+
+    /**
+     * Show the referers list to the user.
+     *
+     * @return Factory|View
+     */
+    public function showReferrersList()
+    {
+        if (setting('disable_referers')) {
+            abort(404);
+        }
+
+        return view('shorturl::analytics.referrers')->with('referrers', UrlClick::getReferersList());
+    }
 }

@@ -1,8 +1,8 @@
 @extends('shorturl::layouts.app', ['title' => trans('analytics.referer.referers')])
-@section('content')
 
+@section('content')
     <div class="header bg-gradient-primary mb-3 pt-6 d-none d-lg-block d-md-block pt-md-7"></div>
-    <div class="container-fluid col-lg-6 col-md-8 col-sm-10 col-12">
+    <div class="container-fluid col-lg-12 col-md-12 col-sm-12">
         <div class="header-body">
             <div class="card">
                 <div class="row">
