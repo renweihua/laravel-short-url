@@ -48,6 +48,11 @@
 											<span class="badge badge-light">{{ __('url.updated', ['date' => formatting_timestamp($data['url']->updated_time)]) }}</span>
                                     </p>
                                 </div>
+                                @if(!empty($data['url']->website_name))
+                                    <p>
+                                        <span class="badge badge-default">{{ __('url.website_name') }}</span> {{$data['url']->website_name}}
+                                    </p>
+                                @endif
                                 <p>
                                     <span class="badge badge-default">{{ __('url.destination') }}</span> &nbsp;{{$data['url']->long_url}}
                                 </p>
@@ -112,6 +117,11 @@
                                         <div class="form-group" id="destinationUrlcontainer">
                                             <input type="url" class="form-control" id="destinationUrl"
                                                    name="url" value="{{$data['url']->long_url}}">
+                                        </div>
+                                        <label class="text-left" for="website_name" style="float:left;">{{ __('url.website_name') }}</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="website_name"
+                                                   name="website_name" value="{{$data['url']->website_name}}">
                                         </div>
                                         <button type="submit" class="btn btn-secondary">{{ __('urlhum.save') }}</button>
                                     </form>

@@ -74,7 +74,7 @@ class UrlController extends ShortUrlController
         }
 
         try {
-            $url = $this->url->shortenUrl($data['url'], $customUrl, $data['privateUrl'], $data['hideUrlStats']);
+            $url = $this->url->shortenUrl($data['url'], $customUrl, $data['privateUrl'], $data['hideUrlStats'], $data['website_name'] ?? '');
         } catch (\Exception $ex) {
             return Redirect::route('home')
                 ->with('error', 'Error. Please try again.');
@@ -157,6 +157,8 @@ class UrlController extends ShortUrlController
 
         $data = $request->validated();
 
+        if (empty($data['website_name'])) $data['website_name'] = '';
+        $url->website_name = $data['website_name'];
         $url->is_public = $data['privateUrl'];
         $url->is_hidden = $data['hideUrlStats'];
         $url->long_url = $data['url'];

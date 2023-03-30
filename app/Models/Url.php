@@ -20,7 +20,7 @@ class Url extends Model
      * @param $is_hidden
      * @return Url
      */
-    public static function createShortUrl($long_url, $short_url, $is_public = 1, $is_hidden = 0): Url
+    public static function createShortUrl($long_url, $short_url, $website_name, $is_public = 1, $is_hidden = 0): Url
     {
         $user_id = 0;
         if (Auth::check()) {
@@ -28,6 +28,7 @@ class Url extends Model
         }
 
         $url = new self;
+        if ($website_name) $url->website_name = $website_name;
         $url->long_url = $long_url;
         if ($short_url) $url->short_url = $short_url;
         $url->user_id = $user_id;

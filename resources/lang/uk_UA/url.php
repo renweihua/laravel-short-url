@@ -9,6 +9,7 @@
  */
 
 return [
+    'website_name' => '站点名称',
   'list' => 'URLs list',
   'edit' => [
     'edit' => 'Edit URL',

@@ -21,6 +21,7 @@
             <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                 <tr>
+                    <th scope="col">{{ __('url.website_name') }}</th>
                     <th scope="col">{{ __('url.short') }}</th>
                     <th scope="col">{{ __('url.long') }}</th>
                     <th scope="col">{{ __('analytics.click.clicks') }}</th>
@@ -34,6 +35,9 @@
                 <tbody>
                 @foreach ($publicUrls as $publicUrl)
                     <tr>
+                        <th scope="row">
+                            {{$publicUrl->website_name}}
+                        </th>
                         <th scope="row">
                             {{$publicUrl->short_url}}
                         </th>
