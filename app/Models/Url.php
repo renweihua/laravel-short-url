@@ -36,7 +36,7 @@ class Url extends Model
 
         // 访问IP与浏览器信息
         $ip_agent = get_client_info();
-        $url->created_ip = $ip_agent['ip'] ?? get_ip();
+        $url->created_ip = request()->ip() ?? $ip_agent['ip'];
         $url->browser_type = $ip_agent['agent'] ?? $_SERVER['HTTP_USER_AGENT'];
         $url->save();
 

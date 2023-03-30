@@ -18,7 +18,7 @@ class UrlClick extends Model
 
         // 访问IP与浏览器信息
         $ip_agent = get_client_info();
-        $data['created_ip'] = $ip_agent['ip'] ?? get_ip();
+        $data['created_ip'] = request()->ip() ?? $ip_agent['ip'];
         $data['browser_type'] = $ip_agent['agent'] ?? $_SERVER['HTTP_USER_AGENT'];
 
         $clickUrl->fill($data);
