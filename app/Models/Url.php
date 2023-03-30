@@ -59,11 +59,11 @@ class Url extends Model
      */
     public static function getLatestPublicUrls(): LengthAwarePaginator
     {
-        return self::select('urls.short_url', 'urls.long_url', DB::raw('count(url_clicks.url_id) as clicks'), 'urls.created_time')
-            ->leftJoin('url_clicks', 'urls.id', '=', 'url_clicks.url_id')
-            ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_time')
-            ->orderBy('urls.created_time', 'DESC')
-            ->where('is_public', '=', 1)
+        return self::where('is_public', '=', 1)
+            ->select('short_url', 'long_url', 'website_name', 'created_time')
+            ->withCount(['clicks as clicks'])
+            ->groupBy('short_url', 'long_url', 'created_time')
+            ->orderBy('created_time', 'DESC')
             ->paginate(20);
     }
 
@@ -75,11 +75,11 @@ class Url extends Model
      */
     public static function publicUrlsWidget()
     {
-        return self::select(['urls.short_url', 'urls.long_url', DB::raw('count(url_clicks.url_id) as clicks'), 'urls.created_time'])
-            ->leftJoin('url_clicks', 'urls.id', '=', 'url_clicks.url_id')
-            ->groupBy('urls.short_url', 'urls.long_url', 'urls.created_time')
-            ->orderBy('urls.created_time', 'DESC')
-            ->where('is_public', '=', 1)
+        return self::where('is_public', '=', 1)
+            ->select(['short_url', 'long_url', 'website_name', 'created_time'])
+            ->withCount(['clicks as clicks'])
+            ->groupBy('short_url', 'long_url', 'created_time')
+            ->orderBy('created_time', 'DESC')
             ->limit(8)
             ->get();
     }
