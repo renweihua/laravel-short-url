@@ -124,7 +124,7 @@ class UrlController extends ShortUrlController
      */
     public function show($url)
     {
-        $url = ShortUrl::with('user:id,name,email')->whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
+        $url = ShortUrl::with('user.userInfo')->whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
 
         if (! $this->url->OwnerOrAdmin($url) ) {
             abort(403);
