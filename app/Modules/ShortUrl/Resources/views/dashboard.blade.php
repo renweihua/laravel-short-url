@@ -26,6 +26,8 @@
             @endisset
         </div>
         @include('shorturl::layouts.footers.auth')
+
+        @include('shorturl::layouts.footers.friendlinks')
     </div>
 @endsection
 

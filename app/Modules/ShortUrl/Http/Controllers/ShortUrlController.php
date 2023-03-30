@@ -2,6 +2,7 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers;
 
+use App\Models\Friendlink;
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
@@ -29,6 +30,8 @@ class ShortUrlController extends Controller
         View::share('languages', $this->languages);
         // 注册域名
         View::share('register_server', self::REGISTER_SERVER);
+        // 友情链接
+        View::share('friendlinks', Friendlink::getFriendlinksByWeb());
     }
 
     protected function getLanaguageCacheKey()

@@ -4,7 +4,6 @@
             &copy; {{ now()->year }} <a href="{{ url('/') }}" class="font-weight-bold ml-1" target="_blank">{{ setting('website_name') }}</a> -
             {{ __('urlhum.design_by') }} <a href="https://bbs.cnpscy.com">小丑路人</a>
         </div>
-
     </div>
     <div class="col-xl-6">
         <ul class="nav nav-footer justify-content-center justify-content-xl-end">
