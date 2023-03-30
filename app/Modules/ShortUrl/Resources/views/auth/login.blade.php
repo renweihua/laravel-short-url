@@ -9,7 +9,7 @@
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            <h3>{{ __('account.sign_in') }}</h3><br>
+                            <h3>{!! __('account.sign_in') !!}</h3><br>
                         </div>
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf

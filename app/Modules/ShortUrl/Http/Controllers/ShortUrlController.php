@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\View;
 
 class ShortUrlController extends Controller
 {
+    const REGISTER_SERVER = 'https://bbs.cnpscy.com/auth/register';
+
     protected $languages = [
         '中文' => 'zh_CN',
         'English' => 'es_ES',
@@ -26,7 +28,7 @@ class ShortUrlController extends Controller
         // 为所有视图共享数据
         View::share('languages', $this->languages);
         // 注册域名
-        View::share('register_server', 'https://bbs.cnpscy.com/auth/register');
+        View::share('register_server', self::REGISTER_SERVER);
     }
 
     protected function getLanaguageCacheKey()

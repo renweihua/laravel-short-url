@@ -7,6 +7,7 @@
  * @copyright Copyright (c) 2019 Christian la Forgia
  * @license   https://github.com/urlhum/UrlHum/blob/master/LICENSE.md (MIT License)
 */
+use App\Modules\ShortUrl\Http\Controllers\ShortUrlController;
 
 return [
     'login_name' => '用户名/邮箱/手机号',
@@ -27,7 +28,7 @@ return [
     'user_created' => '用户创建成功',
     'user_updated' => '用户信息更新成功',
     'user_deleted' => '用户删除成功',
-    'sign_in' => '使用您的凭据登录',
+    'sign_in' => '注册`<a href="' . ShortUrlController::REGISTER_SERVER . '" target="_blank" class="text-light">小丑路人·社区</a>`的账户',
     'email' => 'Email',
     'remember' => '记住我',
     'login' => '登录',
