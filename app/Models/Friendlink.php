@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Cache;
 
 class Friendlink extends Model
 {
+    // 连接User库
+    protected $connection = 'user_mysql';
+
     protected $primaryKey = 'link_id';
 
     /**
