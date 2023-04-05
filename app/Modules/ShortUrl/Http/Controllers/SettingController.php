@@ -2,7 +2,7 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers;
 
-use App\Models\ShortSetting;
+use App\Models\Setting;
 use App\Modules\ShortUrl\Http\Requests\SettingRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
@@ -17,7 +17,7 @@ class SettingController extends ShortUrlController
      */
     public function show()
     {
-        $settings = ShortSetting::getAllSettings();
+        $settings = Setting::getAllSettings();
 
         return view('shorturl::settings')->with('settings', $settings);
     }
@@ -38,7 +38,7 @@ class SettingController extends ShortUrlController
         $imagesVars = ['website_image', 'website_favicon'];
         foreach ($imagesVars as &$var) {
             if ($request->exists($var)) {
-                $data[$var] = ShortSetting::saveImage($data[$var]);
+                $data[$var] = Setting::saveImage($data[$var]);
             }
         }
 
@@ -49,7 +49,7 @@ class SettingController extends ShortUrlController
             }
         }
 
-        ShortSetting::batchSave($data);
+        Setting::batchSave($data);
 
         return redirect()->back()->with('success', trans('settings.success'));
     }

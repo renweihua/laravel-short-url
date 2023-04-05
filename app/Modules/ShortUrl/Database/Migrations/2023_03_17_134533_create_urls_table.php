@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class CreateShortSettingsTable extends Migration
+class CreateUrlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,22 +14,29 @@ class CreateShortSettingsTable extends Migration
      */
     public function up()
     {
-        $table = 'short_settings';
+        $table = 'urls';
         if (Schema::hasTable($table)) return;
         Schema::create($table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('key', 200)->default('')->comment('键名');
-            $table->string('value', 5000)->default('')->comment('键值');
+            $table->bigInteger('user_id')->unsigned()->default(0)->comment('会员Id');
+            $table->string('website_name', 200)->default('')->comment('站点名称');
+            $table->string('long_url', 200)->default('')->comment('长域名');
+            $table->string('short_url', 200)->default('')->comment('短域名');
+            $table->boolean('is_public')->unsigned()->default(1)->comment('是否公开');
+            $table->boolean('is_hidden')->unsigned()->default(0)->comment('是否隐藏');
             $table->integer('created_time')->unsigned()->default(0)->comment('创建时间');
             $table->integer('updated_time')->unsigned()->default(0)->comment('更新时间');
+            $table->string('created_ip', 20)->default('')->comment('创建时的IP');
+            $table->string('browser_type', 300)->default('')->comment('创建时浏览器类型');
             $table->boolean('is_delete')->unsigned()->default(0)->comment('是否删除');
-            $table->unique('key');
+            $table->index('user_id');
+            $table->unique('short_url');
             $table->index('is_delete');
         });
         $table = get_db_prefix() . $table;
         // 设置表注释
-        DB::statement("ALTER TABLE `{$table}` comment '系统配置表'");
+        DB::statement("ALTER TABLE `{$table}` comment 'Url表'");
     }
 
     /**
@@ -39,6 +46,6 @@ class CreateShortSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('short_settings');
+        Schema::dropIfExists('urls');
     }
 }

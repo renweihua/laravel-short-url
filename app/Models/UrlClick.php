@@ -5,7 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class ShortUrlClick extends Model
+class UrlClick extends Model
 {
     /**
      * Store a new Click in database.
@@ -105,6 +105,6 @@ class ShortUrlClick extends Model
      */
     public function url()
     {
-        return $this->belongsTo('App\Url', 'short_url', 'short_url');
+        return $this->belongsTo(Url::class, 'short_url', 'short_url');
     }
 }

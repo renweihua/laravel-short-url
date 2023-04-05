@@ -3,8 +3,8 @@
 namespace App\Modules\ShortUrl\Http\Controllers;
 
 use App\Exceptions\Exception;
-use App\Models\ShortUrl;
-use App\Models\ShortUrlClick;
+use App\Models\Url;
+use App\Models\UrlClick;
 use App\Modules\ShortUrl\Http\Requests\MultipleUrlsRequest;
 use App\Modules\ShortUrl\Http\Requests\ShortUrlRequest;
 use App\Modules\ShortUrl\Services\UrlService;

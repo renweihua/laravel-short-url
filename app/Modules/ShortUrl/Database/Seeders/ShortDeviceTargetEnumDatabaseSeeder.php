@@ -2,7 +2,7 @@
 
 namespace App\Modules\ShortUrl\Database\Seeders;
 
-use App\Models\ShortDeviceTargetsEnum;
+use App\Models\DeviceTargetsEnum;
 use Illuminate\Database\Seeder;
 
 class ShortDeviceTargetEnumDatabaseSeeder extends Seeder
@@ -33,7 +33,7 @@ class ShortDeviceTargetEnumDatabaseSeeder extends Seeder
             ]
         ];
         foreach ($data as $item){
-            ShortDeviceTargetsEnum::create($item);
+            DeviceTargetsEnum::create($item);
         }
     }
 }

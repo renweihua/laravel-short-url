@@ -2,8 +2,8 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers;
 
-use App\Models\ShortUrl;
-use App\Models\ShortUrlClick;
+use App\Models\Url;
+use App\Models\UrlClick;
 use App\Modules\ShortUrl\Http\Requests\ShortUrlRequest;
 use App\Modules\ShortUrl\Services\UrlService;
 use Illuminate\Contracts\Support\Renderable;
@@ -100,7 +100,7 @@ class UrlController extends ShortUrlController
             abort(404);
         }
 
-        return view('shorturl::url.public')->with('urls', ShortUrl::getLatestPublicUrls());
+        return view('shorturl::url.public')->with('urls', Url::getLatestPublicUrls());
     }
 
     /**
@@ -110,7 +110,7 @@ class UrlController extends ShortUrlController
      */
     public function getMyUrls()
     {
-        $urls = ShortUrl::getMyUrls();
+        $urls = Url::getMyUrls();
 
         return view('shorturl::url.my')->with('urls', $urls);
     }
@@ -124,7 +124,7 @@ class UrlController extends ShortUrlController
      */
     public function show($url)
     {
-        $url = ShortUrl::with('user.userInfo')->whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
+        $url = Url::with('user.userInfo')->whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
 
         if (! $this->url->OwnerOrAdmin($url) ) {
             abort(403);
@@ -149,7 +149,7 @@ class UrlController extends ShortUrlController
      */
     public function update($url, ShortUrlRequest $request)
     {
-        $url = ShortUrl::whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
+        $url = Url::whereRaw('BINARY `short_url` = ?', [$url])->firstOrFail();
 
         if (! $this->url->OwnerOrAdmin($url)) {
             return response('Forbidden', 403);
@@ -176,13 +176,13 @@ class UrlController extends ShortUrlController
      */
     public function destroy($short_url)
     {
-        $url = ShortUrl::whereRaw('BINARY `short_url` = ?',  [$short_url])->firstOrFail();
+        $url = Url::whereRaw('BINARY `short_url` = ?',  [$short_url])->firstOrFail();
 
         if (! $this->url->OwnerOrAdmin($url)) {
             return response('Forbidden', 403);
         }
 
-        ShortUrlClick::deleteUrlsClicks($url);
+        UrlClick::deleteUrlsClicks($url);
 
         $url->deviceTargets()->delete();
         $url->delete();
@@ -199,7 +199,7 @@ class UrlController extends ShortUrlController
     public function checkExistingUrl(Request $request)
     {
         if ($this->url->isUrlReserved($request->input) ||
-            ShortUrl::whereRaw('BINARY `short_url` = ?', [$request->input])->exists() ||
+            Url::whereRaw('BINARY `short_url` = ?', [$request->input])->exists() ||
             (! setting('deleted_urls_can_be_recreated')) || $this->url->isShortUrlProtected($request->input)) {
             return response('Custom URL already existing', 409);
         }

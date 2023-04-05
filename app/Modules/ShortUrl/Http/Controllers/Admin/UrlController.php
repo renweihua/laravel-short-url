@@ -2,8 +2,8 @@
 
 namespace App\Modules\ShortUrl\Http\Controllers\Admin;
 
-use App\Models\ShortUrl;
-use App\Models\ShortUrlClick;
+use App\Models\Url;
+use App\Models\UrlClick;
 use App\Modules\ShortUrl\Http\Controllers\ShortUrlController;
 use App\Modules\ShortUrl\Http\Requests\ShortUrlRequest;
 use App\Modules\ShortUrl\Services\UrlService;
@@ -59,7 +59,7 @@ class UrlController extends ShortUrlController
         // Here we add a column with the buttons to show analytics and edit short URLs.
         // There could be a better way to do this.
         // TODO: Really NEED to find a better way to handle this. It's horrible.
-        $lists = ShortUrl::with('user.userInfo')->orderByDesc('id')->get();
+        $lists = Url::with('user.userInfo')->orderByDesc('id')->get();
 
         foreach ($lists as $item){
             $item->show_created_time = formatting_timestamp($item->created_time);

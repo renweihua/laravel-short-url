@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-class ShortUrl extends Model
+class Url extends Model
 {
     /**
      * Create a Short URL based on the given parameters.
@@ -19,9 +19,9 @@ class ShortUrl extends Model
      * @param $is_public
      * @param $is_hidden
      *
-     * @return ShortUrl
+     * @return Url
      */
-    public static function createShortUrl($long_url, $short_url, $website_name, $is_public = 1, $is_hidden = 0): ShortUrl
+    public static function createShortUrl($long_url, $short_url, $website_name, $is_public = 1, $is_hidden = 0): Url
     {
         $user_id = 0;
         if (Auth::check()) {
@@ -45,7 +45,7 @@ class ShortUrl extends Model
         return $url;
     }
 
-    public static function assignShortUrlToUrl(ShortUrl $url, string $shortUrl): ShortUrl
+    public static function assignShortUrlToUrl(Url $url, string $shortUrl): Url
     {
         $url->short_url = $shortUrl;
         $url->save();
@@ -102,13 +102,13 @@ class ShortUrl extends Model
     }
 
     /**
-     * ShortUrl Eloquent hasMany relationship with ViewUrl.
+     * Url Eloquent hasMany relationship with ViewUrl.
      *
      * @return HasMany
      */
     public function clicks()
     {
-        return $this->hasMany(ShortUrlClick::class, 'url_id', 'id');
+        return $this->hasMany(UrlClick::class, 'url_id', 'id');
     }
 
     /**
@@ -127,6 +127,6 @@ class ShortUrl extends Model
      */
     public function deviceTargets(): HasMany
     {
-        return $this->hasMany(ShortDeviceTarget::class, 'short_url_id', 'id');
+        return $this->hasMany(DeviceTarget::class, 'short_url_id', 'id');
     }
 }

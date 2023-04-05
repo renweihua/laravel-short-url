@@ -1,6 +1,6 @@
 <?php
 use App\Models\User;
-use App\Models\ShortSetting;
+use App\Models\Setting;
 
 function isAdmin()
 {
@@ -34,7 +34,7 @@ function get_db_prefix()
 
 function setting($name, $default = '')
 {
-    $all_settings = ShortSetting::getAllSettings();
+    $all_settings = Setting::getAllSettings();
     // var_dump($all_settings);
     return $all_settings->get($name) ?? $default;
 }

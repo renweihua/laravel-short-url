@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use JsonException;
 
-class ShortSetting extends Model
+class Setting extends Model
 {
     public static function getSettingCacheKey()
     {
@@ -24,7 +24,7 @@ class ShortSetting extends Model
         $cache_key = self::getSettingCacheKey();
         $settings = Cache::get($cache_key);
         if (!$settings || $force){
-            $settings = ShortSetting::pluck('value', 'key');
+            $settings = Setting::pluck('value', 'key');
 
             $reserved = json_decode($settings->get('reservedShortUrls'), true, 512, JSON_THROW_ON_ERROR);
             // Check if there are actually any reserved Short URLs
