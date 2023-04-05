@@ -12,6 +12,9 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable, HasFactory;
 
+    // 连接User库
+    protected $connection = 'user_mysql';
+
     /**
      * The attributes that are mass assignable.
      *
