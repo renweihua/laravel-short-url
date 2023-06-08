@@ -21,7 +21,7 @@ class SettingTableSeeder extends Seeder
             ],
             [
                 'key' => 'registration',
-                'value' => 0,
+                'value' => 1,
             ],
             [
                 'key' => 'private_site',
