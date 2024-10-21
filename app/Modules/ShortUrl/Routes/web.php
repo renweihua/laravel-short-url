@@ -70,6 +70,9 @@ Route::prefix('')->group(function() {
         Route::get('list', 'Admin\UrlController@showUrlsList')->middleware('admin')->name('url.list');
         // 管理员查看短链接列表的数据加载
         Route::get('list-load', 'Admin\UrlController@loadUrlsList')->middleware('admin')->name('url.list-load');
+        // 禁用URL
+        Route::match(['GET', 'PUT'], '{url}/forbidden', 'Admin\UrlController@forbidden')->middleware('admin')->name('url.forbidden');
+
         Route::get('referers', 'AnalyticController@showReferrersList')->name('url.referers')->middleware('admin');
     });
 

@@ -15,6 +15,9 @@ return [
     'edit' => 'Изменить URL',
     'short' => 'Изменить короткий URL',
   ],
+    'forbidden' => [
+        'short' => 'Захищена адреса URL',
+    ],
   'created' => 'URL создан в :date',
   'url' => 'URL-адрес',
   'my' => [
@@ -40,6 +43,7 @@ return [
     'destination' => 'URL назначения',
     'options' => 'Параметры',
     'custom' => 'Свой короткий URL',
+    'forbidden' => 'Set this URL to disabled',
   ],
   'id' => 'ID',
   'createdStr' => 'Создан',
@@ -54,4 +58,5 @@ return [
   'qrcode' => 'QR Code',
   'qrcode_modal' => 'QR Code',
   'qrcode_download' => 'Download',
+  'remarks' => 'Remarks',
 ];

@@ -15,6 +15,9 @@ return [
     'edit' => 'Modifica URL',
     'short' => 'Modifica Short URL',
   ],
+    'forbidden' => [
+        'short' => 'Forbidden URL',
+    ],
   'created' => 'URL creato il :date',
   'url' => 'URL',
   'my' => [
@@ -40,6 +43,7 @@ return [
     'destination' => 'URL di destinazione',
     'options' => 'Opzioni',
     'custom' => 'Short URL personalizzato',
+    'forbidden' => 'Set this URL to disabled',
   ],
   'id' => 'ID',
   'createdStr' => 'Creato',
@@ -54,4 +58,5 @@ return [
   'qrcode' => 'QR Code',
   'qrcode_modal' => 'QR Code',
   'qrcode_download' => 'Download',
+  'remarks' => 'Remarks',
 ];

@@ -16,10 +16,13 @@ return [
         'description' => '粘贴多个URL，每行一个'
     ],
   'list' => 'URL 列表',
-  'edit' => [
+'edit' => [
     'edit' => '编辑 URL',
     'short' => '编辑短链接',
-  ],
+],
+'forbidden' => [
+    'short' => '禁用短链接',
+],
   'created' => '在 :date 创建的URL',
   'url' => 'URL',
   'my' => [
@@ -45,6 +48,7 @@ return [
     'destination' => 'URL 地址',
     'options' => '选项',
     'custom' => '自定义短链接',
+    'forbidden' => '将此URL从设为禁用',
   ],
   'id' => 'ID',
   'createdStr' => '创建时间',
@@ -59,4 +63,5 @@ return [
   'qrcode' => 'QR Code',
   'qrcode_modal' => 'QR Code',
   'qrcode_download' => 'Download',
+  'remarks' => '备注',
 ];
