@@ -32,4 +32,6 @@ return [
   'close' => '关闭',
   'edit' => '编辑',
   'user' => '用户',
+  'forbidden' => '禁用',
+  'unblock' => '解除禁用',
 ];

@@ -32,4 +32,6 @@ return [
   'close' => 'Close',
   'edit' => 'Edit',
   'user' => 'User',
+  'forbidden' => 'Forbidden',
+  'unblock' => 'Unblock',
 ];
