@@ -67,9 +67,14 @@ class UrlController extends ShortUrlController
 
         $dataTable = DataTables::of($lists)
             ->addColumn('action', function ($row) {
-                return '<a href="/'.$row->short_url.'+"><button type="button" class="btn btn-secondary btn-sm btn-url-analytics"><i class="fa fa-chart-bar" alt="Analytics"> </i> '.trans('analytics.analytics').'</button></a> &nbsp;
-                       <a href="/url/'.$row->short_url.'"><button type="button" class="btn btn-success btn-sm btn-url-edit"><i class="fa fa-pencil-alt" alt="Edit"> </i>'.trans('urlhum.edit').'</button></a> &nbsp;
-                       <a href="'. route('url.forbidden', $row->short_url) .'"><button type="button" class="btn btn-success btn-sm btn-url-edit"><i class="fa fa-lock" alt="Forbidden"> </i>'.trans('urlhum.close').'</button></a>';
+                $html = '<a href="/'.$row->short_url.'+"><button type="button" class="btn btn-secondary btn-sm btn-url-analytics"><i class="fa fa-chart-bar" alt="Analytics"> </i> '.trans('analytics.analytics').'</button></a> &nbsp;
+                       <a href="/url/'.$row->short_url.'"><button type="button" class="btn btn-success btn-sm btn-url-edit"><i class="fa fa-pencil-alt" alt="Edit"> </i>'.trans('urlhum.edit').'</button></a> &nbsp;';
+                if ($row->is_forbidden == 1){
+                    $html .= '<a href="'. route('url.forbidden', $row->short_url) .'"><button type="button" class="btn btn-success btn-sm btn-url-edit"><i class="fa fa-unlock" alt="Unblock"> </i>'.trans('urlhum.unblock').'</button></a>';
+                }else{
+                    $html .= '<a href="'. route('url.forbidden', $row->short_url) .'"><button type="button" class="btn btn-danger btn-sm btn-url-edit"><i class="fa fa-lock" alt="Forbidden"> </i>'.trans('urlhum.forbidden').'</button></a>';
+                }
+                return $html;
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -98,7 +103,7 @@ class UrlController extends ShortUrlController
                 $url->forbidden_time = time();
             }
             if (empty($data['admin_remarks'])) $data['admin_remarks'] = '';
-            $url->admin_remarks = $data['admin_remarks'];
+            $url->admin_remarks = trim($data['admin_remarks']);
             $url->update();
 
             return Redirect::route('url.list')

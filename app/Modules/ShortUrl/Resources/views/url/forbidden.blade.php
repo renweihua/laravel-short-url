@@ -1,4 +1,4 @@
-@extends('shorturl::layouts.app',  ['title' => trans('url.forbidden.short')])
+@extends('shorturl::layouts.app',  ['title' => $data['url']->is_forbidden == 1 ? trans('url.unblock.short') : trans('url.forbidden.short')])
 @section('content')
     <div class="header bg-gradient-primary mb-3 pt-6 d-none d-lg-block d-md-block pt-md-7"></div>
     <div class="container-fluid col-lg-10 col-sm-12 m-auto">
@@ -8,7 +8,12 @@
                     <div class="col">
                         <div class="card shadow">
                             <div class="card-header d-flex justify-content-between">
-                                <h1>{{ __('url.forbidden.short') }}
+                                <h1>
+                                    @if($data['url']->is_forbidden == 1)
+                                        {{ __('url.unblock.short') }}
+                                    @else
+                                        {{ __('url.forbidden.short') }}
+                                    @endif
                                     <a href="/{{$data['url']->short_url}}">{{$data['url']->short_url}}</a>
                                 </h1>
                                 <form action="/url/{{$data['url']->short_url}}" method="POST" id="deleteUrl">
@@ -88,9 +93,7 @@
                                         </div>
                                         <label class="text-left" for="admin_remarks" style="float:left;">{{ __('url.remarks') }}</label>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="admin_remarks" rows="3" onmousedown="setCursorToStart(event)">
-                                                {{$data['url']->admin_remarks}}
-                                            </textarea>
+                                            <textarea class="form-control" name="admin_remarks" rows="3" onmousedown="setCursorToStart(event)">{{ trim($data['url']->admin_remarks) }}</textarea>
                                         </div>
                                         <button type="submit" class="btn btn-secondary">{{ __('urlhum.save') }}</button>
                                     </form>

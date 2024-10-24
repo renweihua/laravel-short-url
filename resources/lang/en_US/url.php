@@ -18,6 +18,9 @@ return [
     'forbidden' => [
         'short' => 'Forbidden URL',
     ],
+    'unblock' => [
+        'short' => '解除禁用短链接',
+    ],
     'multiple' => [
         'title' => 'Create multiple links',
         'new' => 'Create new Short URLs',

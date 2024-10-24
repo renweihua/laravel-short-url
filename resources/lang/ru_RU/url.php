@@ -18,6 +18,9 @@ return [
     'forbidden' => [
         'short' => 'Захищена адреса URL',
     ],
+  'unblock' => [
+    'short' => '解除禁用短链接',
+  ],
   'created' => 'URL создан в :date',
   'url' => 'URL-адрес',
   'my' => [

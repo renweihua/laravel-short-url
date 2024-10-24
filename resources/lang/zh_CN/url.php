@@ -23,6 +23,9 @@ return [
 'forbidden' => [
     'short' => '禁用短链接',
 ],
+'unblock' => [
+    'short' => '解除禁用短链接',
+],
   'created' => '在 :date 创建的URL',
   'url' => 'URL',
   'my' => [

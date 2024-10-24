@@ -18,6 +18,9 @@ return [
     'forbidden' => [
         'short' => 'Forbidden URL',
     ],
+  'unblock' => [
+    'short' => '解除禁用短链接',
+  ],
   'created' => 'URL creada en :date',
   'url' => 'URL',
   'my' => [
