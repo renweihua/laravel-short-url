@@ -83,6 +83,14 @@ class UrlClickController extends ShortUrlController
 
         UrlClick::store($data);
 
+        if ($urlRecord->is_forbidden == 1){
+            $message = '抱歉，您的链接已被管理员封禁！';
+            if (!empty($urlRecord->admin_remarks)){
+                $message .= '原因：' . $urlRecord->admin_remarks;
+            }
+            abort(400, $message);
+        }
+
         return Redirect::away($externalUrl);
     }
 
