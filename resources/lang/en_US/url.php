@@ -15,6 +15,12 @@ return [
         'edit' => 'Edit URL',
         'short' => 'Edit Short URL',
     ],
+    'forbidden' => [
+        'short' => 'Forbidden URL',
+    ],
+    'unblock' => [
+        'short' => '解除禁用短链接',
+    ],
     'multiple' => [
         'title' => 'Create multiple links',
         'new' => 'Create new Short URLs',
@@ -45,6 +51,7 @@ return [
         'destination' => 'Destination URL',
         'options' => 'Options',
         'custom' => 'Custom Short URL',
+        'forbidden' => 'Set this URL to disabled',
     ],
     'id' => 'ID',
     'createdStr' => 'Created',
@@ -59,4 +66,5 @@ return [
     'qrcode' => 'QR Code',
     'qrcode_modal' => 'QR Code',
     'qrcode_download' => 'Download',
+  'remarks' => 'Remarks',
 ];
