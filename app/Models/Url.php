@@ -81,7 +81,7 @@ class Url extends Model
             ->withCount(['clicks as clicks'])
             ->groupBy('short_url', 'long_url', 'created_time')
             ->orderBy('created_time', 'DESC')
-            ->limit(8)
+            ->limit(15)
             ->get();
     }
 
